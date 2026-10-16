@@ -48,7 +48,7 @@ const COPY = {
     pop: { soft: ['啪', '轻拍', '软'], mid: ['好软', '弹', '啪', '舒服'], big: ['呼噜', '好舒服', '再来', '真舒服'], face: ['蹭蹭', '呼噜', '❤'], pet: ['摸摸', '呼噜', '舒服'] },
     feel: ['还没开始，猫咪在等你。', '拍了一下，压力开始松动。', '拍了几下，心情轻松了一些。', '肩膀放松了，今天可以从容下班。', '压力清零，整个人都回来了。', '今天的辛苦，猫咪替你分担了。'],
     card: { pill: (d) => '今日放松报告 · ' + d.toLocaleDateString('zh-CN', { month: 'long', day: 'numeric' }), title: '今天拍了猫屁屁', unit: () => '下',
-      stamp: ['压力', '已清零', '缓解中'], company: (c) => `${c.name}（${c.tag}）陪你放松`, tryIt: (a) => `来拍一下 ▸ ${a}`, slogan: '拍一下猫屁屁 · 30 秒放松一下',
+      stamp: ['压力', '已清零', '缓解中'], company: (c) => `${c.name}（${c.tag}）陪你放松`, tryIt: (a) => `拍拍屁屁就哼哼 ▸ ${a}`, slogan: '拍拍屁屁就哼哼',
       file: (n) => `拍猫屁屁-${n}下.png` },
     cats: {
       orange: { name: '橘子', tag: '温顺', chip: '温顺', lines: {
@@ -73,7 +73,7 @@ const COPY = {
     pop: { soft: ['Pat.', 'Boop.', 'Soft.'], mid: ['So soft.', 'Bouncy.', 'Pat.', 'Nice.'], big: ['Purr.', 'So good.', 'Again.', 'Bliss.'], face: ['Nuzzle.', 'Purr.', '❤'], pet: ['Pet.', 'Purr.', 'Cozy.'] },
     feel: ['No pats yet. The cat is waiting.', 'One pat. The stress is starting to ease.', 'A few pats. Already feeling lighter.', 'Shoulders down. You can leave work on time today.', 'Stress cleared. You feel like yourself again.', 'The cat took on the day’s stress for you.'],
     card: { pill: (d) => 'Daily Unwind Report · ' + d.toLocaleDateString('en-US', { month: 'short', day: 'numeric' }), title: 'Today’s cat pats', unit: (n) => (n === 1 ? 'pat' : 'pats'),
-      stamp: ['STRESS', 'OFF', 'LOW'], company: (c) => `${c.name} (${c.tag}) kept you company.`, tryIt: (a) => `Your turn ▸ ${a}`, slogan: 'Pat the cat · Unwind in 30 seconds',
+      stamp: ['STRESS', 'OFF', 'LOW'], company: (c) => `${c.name} (${c.tag}) kept you company.`, tryIt: (a) => `Pat it, it purrs ▸ ${a}`, slogan: 'Pat it, it purrs',
       file: (n) => `cat-pats-${n}.png` },
     cats: {
       orange: { name: 'Tangerine', tag: 'Easygoing', chip: 'Easygoing', lines: {

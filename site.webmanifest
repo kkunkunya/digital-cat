@@ -1,7 +1,7 @@
 {
-  "name": "数字猫猫 Digital Cat",
+  "name": "数字猫猫 Digital Cats",
   "short_name": "数字猫猫",
-  "description": "拍一下猫屁屁，30 秒放松一下。Pat the cat and unwind in 30 seconds.",
+  "description": "拍拍屁屁就哼哼。Pat it, it purrs.",
   "start_url": "/",
   "display": "standalone",
   "background_color": "#fff3e3",

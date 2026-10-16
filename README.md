@@ -1,12 +1,12 @@
-# 数字猫猫 · Digital Cat
+# 数字猫猫 · Digital Cats
 
-**拍一下猫屁屁，30 秒班味清零。** 手机上的一只 3D 毛绒猫：拍拍它，它会抖毛、呼噜、回你一声喵。不用下载，不用登录。
+**拍拍屁屁就哼哼。** 手机上的一只 3D 毛绒猫：拍拍它，它会抖毛、呼噜、回你一声喵。不用下载，不用登录。
 
-**Pat the cat. Unwind in 30 seconds.** A fluffy 3D cat on your phone — pat it and it ruffles, purrs and meows back. No download, no sign-up.
+**Pat it, it purrs.** A fluffy 3D cat on your phone — pat it and it ruffles, purrs and meows back. No download, no sign-up.
 
 ▶ **https://cat.kunkunzheten.top**
 
-![Digital Cat](og.png)
+![Digital Cats](og.png)
 
 ## 怎么做的 · How it's made
 
