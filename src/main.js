@@ -738,6 +738,7 @@ function applyState(dt = 1 / 60) {
   G.uSquash.value = soft(S.squash.x, 0.16, 0.3);
   G.uShear.value.set(soft(S.shX.x, 0.2, 0.2), soft(S.shZ.x, 0.2, 0.2));
   G.uLift.value = S.lift.x;
+  if (S.lift.x > 0.17 && !document.body.dataset.buttUp) document.body.dataset.buttUp = '1'; // first butt-raise: site.js may show the tip hint
   G.uHit.value.set(S.hit.x, S.hit.y, S.hit.z, S.dent.x);
   G.uRip.value.set(S.rip, S.ripPhase);
   G.uWind.value.set(soft(-S.shX.v * 0.02, 0.06, 0.06), soft(S.squash.v * 0.015, 0.06, 0.06), soft(-S.shZ.v * 0.02, 0.06, 0.06));
