@@ -12,7 +12,7 @@
     // Waffo store "Digital Cat" STO_0ELaxh4E3ix66V6hPuKLKl; product published to test + prod (same id).
     "WAFFO_PRODUCT_TIP": "PROD_4C5pAuqWJEgq7E2qkuSxyY",
     // "1" only after Waffo approves the store for production payments; until then the tip stays hidden.
-    "TIP_LIVE": "0"
+    "TIP_LIVE": "1"
   },
   "workers_dev": false,
   "preview_urls": false
