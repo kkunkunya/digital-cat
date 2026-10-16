@@ -41,9 +41,10 @@ const CATS = [
 // ───────────────────────── words (one entry per language; adding a language = adding one entry) ─────────────────────────
 const COPY = {
   zh: {
-    title: '数字猫猫 · 拍拍屁屁就哼哼',
-    ui: { ear: '建议佩戴耳机', hint: '点击轻拍<small>左右拖动可转动视角</small>', pre: '已拍', unit: '下', done: '放松完成，分享战绩', cred: '音效来源',
+    title: '在线撸猫解压小游戏｜数字猫猫',
+    ui: { ear: '建议佩戴耳机', hint: '拍一下屁屁，它就呼噜<small>真猫录音 · 点一下听听 · 左右拖动转视角</small>', pre: '已拍', unit: '下', done: '放松完成，分享战绩', cred: '音效来源',
       share: '晒给朋友', tip: '长按图片即可保存或发送给朋友。', save: '保存图片', close: '关闭' },
+    shareText: '拍了一下猫屁屁，它居然舒服地呼噜了。你也试试？',
     sound: '声音', soundOn: '开启声音', soundOff: '关闭声音', saved: '已保存', cardAlt: '分享图', combo: '连拍 ×', wrap: '30 秒到了，好好放松一下。',
     pop: { soft: ['啪', '轻拍', '软'], mid: ['好软', '弹', '啪', '舒服'], big: ['呼噜', '好舒服', '再来', '真舒服'], face: ['蹭蹭', '呼噜', '❤'], pet: ['摸摸', '呼噜', '舒服'] },
     feel: ['还没开始，猫咪在等你。', '拍了一下，压力开始松动。', '拍了几下，心情轻松了一些。', '肩膀放松了，今天可以从容下班。', '压力清零，整个人都回来了。', '今天的辛苦，猫咪替你分担了。'],
@@ -66,9 +67,10 @@ const COPY = {
     },
   },
   en: {
-    title: 'Digital Cats · Pat it, it purrs',
-    ui: { ear: 'Best with headphones', hint: 'Tap to pat<small>Drag sideways to turn the view.</small>', pre: '', unit: 'pats', done: 'All done. Share your score.', cred: 'Audio credits',
+    title: 'Cat Game Online | Digital Cats · Real Purrs',
+    ui: { ear: 'Best with headphones', hint: 'Pat its butt. Hear that happy little purr.<small>Real cat recordings · drag sideways to turn the view</small>', pre: '', unit: 'pats', done: 'All done. Share your score.', cred: 'Audio credits',
       share: 'Share with a friend', tip: 'Press and hold the image to save or share it.', save: 'Save image', close: 'Close' },
+    shareText: 'One little pat, one very happy purr. Your turn.',
     sound: 'Sound', soundOn: 'Sound on', soundOff: 'Sound off', saved: 'Saved', cardAlt: 'Score card', combo: 'Combo ×', wrap: 'Thirty seconds. Feeling lighter already.',
     pop: { soft: ['Pat.', 'Boop.', 'Soft.'], mid: ['So soft.', 'Bouncy.', 'Pat.', 'Nice.'], big: ['Purr.', 'So good.', 'Again.', 'Bliss.'], face: ['Nuzzle.', 'Purr.', '❤'], pet: ['Pet.', 'Purr.', 'Cozy.'] },
     feel: ['No pats yet. The cat is waiting.', 'One pat. The stress is starting to ease.', 'A few pats. Already feeling lighter.', 'Shoulders down. You can leave work on time today.', 'Stress cleared. You feel like yourself again.', 'The cat took on the day’s stress for you.'],
@@ -1334,7 +1336,7 @@ $('#savebtn').addEventListener('click', async () => {
   const name = TX().card.file(taps);
   const file = new File([cardBlob], name, { type: 'image/png' });
   if (navigator.canShare && navigator.canShare({ files: [file] }) && /Mobi|Android|iPhone|iPad/.test(navigator.userAgent)) {
-    try { await navigator.share({ files: [file] }); return; } catch (e) { if (e.name === 'AbortError') return; }
+    try { await navigator.share({ files: [file], text: TX().shareText + ' https://cat.kunkunzheten.top/' }); return; } catch (e) { if (e.name === 'AbortError') return; }
   }
   const a = document.createElement('a'); a.href = URL.createObjectURL(cardBlob); a.download = name;
   document.body.appendChild(a); a.click(); a.remove();

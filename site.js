@@ -9,13 +9,13 @@
     // Copy from the social-media manager's 1016 sheet. Sound lines say "real cats" / "pats & meows" because
     // the purr is a public-domain recording, not Kun's cat (audio/CREDITS.txt).
     zh: {
-      intro: '拍拍它的屁屁，它会哼哼给你听。', by: '声音都来自真猫。坤坤做的小玩具。', faq: '常见问题',
+      intro: '拍拍它的屁屁，它会哼哼给你听。', by: '声音都来自真猫。坤坤做的小玩具。', faq: '怎么玩 · 声音来源 · 费用 · 常见问题',
       gh: '开源代码', mail: `联系：${MAIL}`, privacy: '不收集个人信息，只在你手机里记战绩', terms: '条款', cred: '拍打声和喵声录自坤坤家的猫',
       tarot: '我们还做了免费塔罗占卜站 Dear Arcana →',
       tip: '给 Tangerine 和 Coal 买个罐罐 🐟', tipNote: '喜欢就投喂，不投也能一直玩', tipAria: '打赏 2.99 美元，给 Tangerine 和 Coal 买个罐罐',
     },
     en: {
-      intro: 'Pat its butt. It purrs back.', by: 'Real sounds from real cats. A tiny toy by Kunkun.', faq: 'FAQ',
+      intro: 'Pat its butt. It purrs back.', by: 'Real sounds from real cats. A tiny toy by Kunkun.', faq: 'How to play · Sound sources · Pricing · FAQ',
       gh: 'Open source', mail: `Contact: ${MAIL}`, privacy: 'No personal data — scores stay on your device', terms: 'Terms', cred: "Pats & meows recorded from Kunkun's own cat",
       tarot: 'Also by us: Dear Arcana, free online tarot →',
       tip: 'Buy Tangerine and Coal a can of treats 🐟', tipNote: "Totally optional — it's free forever", tipAria: 'Tip US$2.99 to buy Tangerine and Coal a can of treats',
