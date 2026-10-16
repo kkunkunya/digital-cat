@@ -6,3 +6,6 @@ review/
 _raw_audio/
 *.bak-*
 node_modules/
+_tools/
+_shots/
+.dev.vars
