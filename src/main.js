@@ -18,7 +18,9 @@ const CATS = [
     iris: '#f4dc68', irisOut: '#9aa838', pupil: 0.56, slit: 1.0, lidRest: 0,
     tail: { n: 26, len: 1.45, r0: 0.13, r1: 0.1, rest: [-0.9, 1.1, 0.6, 2.4], up: [1.3, -0.75, -0.45, -0.5] },
     look: { k: 24, c: 8, hold: 2.6, delay: 300 }, // slow, lingering look back
-    purr: 'audio/purr_orange.mp3', cuts: [0.45, 1.96, 3.72, 5.59], meowRate: 0.84, chirpRate: 0.88,
+    purr: 'audio/purr_orange.mp3', cuts: [0.45, 1.96, 3.72, 5.59],
+    // Kun's own cat (audio/kun), as recorded
+    meow: { rate: 1, gain: 0.7 },
   },
   {
     // puff: the short satin coat needs a bigger bristle to read on camera when it startles
@@ -30,60 +32,64 @@ const CATS = [
     iris: '#f8e660', irisOut: '#c0a01c', pupil: 0.55, slit: 0.85, lidRest: 0.08,
     tail: { n: 32, len: 1.3, r0: 0.08, r1: 0.055, rest: [1.3, -2.5, -1.25, -0.2], up: [1.32, -1.2, -0.5, -0.5] },
     look: { k: 120, c: 15, hold: 0.9, delay: 30 }, // quick side-eye, then pretends it didn't care
-    purr: 'audio/purr_black.mp3', cuts: [0.59, 2.18, 3.56, 5.31, 6.57, 8.72], meowRate: 1.12, chirpRate: 1.22,
+    purr: 'audio/purr_black.mp3', cuts: [0.59, 2.18, 3.56, 5.31, 6.57, 8.72],
+    // the same real meows, a little lower
+    meow: { rate: 0.9, gain: 0.7 },
   },
 ];
 
 // ───────────────────────── words (one entry per language; adding a language = adding one entry) ─────────────────────────
 const COPY = {
   zh: {
-    title: '拍一下猫屁屁 · 30 秒班味清零', other: 'EN',
-    ui: { ear: '🎧 戴耳机更像真猫', hint: '👋 拍拍屁屁<small>左右拖动 · 转着看</small>', unit: '下', done: '班味已清零 ✓ 晒一张', cred: '声音<br>素材',
-      share: '晒今日战绩', tip: '长按图片保存，或发给朋友', save: '保存图片', close: '关闭' },
-    sound: '声音开关', purrOn: '开呼噜声', soundOn: '有声', saved: '已下载 ✓', cardAlt: '分享图', combo: '连拍 ×', wrap: '✨ 30 秒到：班味已清零',
-    pop: { soft: ['啪', '噗', '软'], mid: ['Q弹!', 'duang~', '软乎乎', '啪!'], big: ['呼噜噜', '舒服~', 'duang!!', '再来!'], face: ['蹭蹭', '呼噜~', '❤'], pet: ['摸摸', '呼噜~', '舒服'] },
-    feel: ['还没拍呢，猫猫在等你', '拍了一下，班味开始松动', '拍了几下，班味淡了一点', '肩膀松了，今天可以体面下班', '班味清零，灵魂回到了身体里', '猫替你上了班，你替猫喊了累'],
-    card: { pill: (d) => '今日解压报告 · ' + d.toLocaleDateString('zh-CN', { month: 'long', day: 'numeric' }), title: '今天拍了猫屁屁', unit: () => '下',
-      stamp: ['班味', '已清零', '松动中'], company: (c) => `${c.name}（${c.tag}）陪你解压`, tryIt: (a) => `拍一下试试 ▸ ${a}`, slogan: '拍一下猫屁屁 · 30 秒班味清零',
+    title: '在线撸猫解压小游戏｜数字猫猫',
+    ui: { ear: '建议佩戴耳机', hint: '拍一下屁屁，它就呼噜<small>真猫录音 · 点一下听听 · 左右拖动转视角</small>', pre: '已拍', unit: '下', done: '放松完成，分享战绩', cred: '音效来源',
+      share: '晒给朋友', tip: '长按图片即可保存或发送给朋友。', save: '保存图片', close: '关闭' },
+    shareText: '拍了一下猫屁屁，它居然舒服地呼噜了。你也试试？',
+    sound: '声音', soundOn: '开启声音', soundOff: '关闭声音', saved: '已保存', cardAlt: '分享图', combo: '连拍 ×', wrap: '30 秒到了，好好放松一下。',
+    pop: { soft: ['啪', '轻拍', '软'], mid: ['好软', '弹', '啪', '舒服'], big: ['呼噜', '好舒服', '再来', '真舒服'], face: ['蹭蹭', '呼噜', '❤'], pet: ['摸摸', '呼噜', '舒服'] },
+    feel: ['还没开始，猫咪在等你。', '拍了一下，压力开始松动。', '拍了几下，心情轻松了一些。', '肩膀放松了，今天可以从容下班。', '压力清零，整个人都回来了。', '今天的辛苦，猫咪替你分担了。'],
+    card: { pill: (d) => '今日放松报告 · ' + d.toLocaleDateString('zh-CN', { month: 'long', day: 'numeric' }), title: '今天拍了猫屁屁', unit: () => '下',
+      stamp: ['压力', '已清零', '缓解中'], company: (c) => `${c.name}（${c.tag}）陪你放松`, tryIt: (a) => `拍拍屁屁就哼哼 ▸ ${a}`, slogan: '拍拍屁屁就哼哼',
       file: (n) => `拍猫屁屁-${n}下.png` },
     cats: {
-      orange: { name: '橘团', tag: '慢吞吞 · 软乎乎', chip: '慢吞吞', lines: {
-        idle: '橘团在晒屁屁，拍一下试试',
-        first: '橘团：嗯…？（慢半拍回头）',
-        mid: ['又软又弹，班味掉了一半', '橘团：再来一下，不急', '肩膀松下来了吧'],
-        high: ['橘团化成了一滩猫饼', '咕噜声开到最大了', '老板是谁？不认识'],
-        pet: ['橘团把头顶进你手心', '橘团眯成了一条缝'] } },
-      black: { name: '煤球', tag: '傲娇 · 嘴硬', chip: '傲娇', lines: {
-        idle: '煤球斜眼看你：不许拍',
-        first: '煤球：哼！谁准你拍的',
-        mid: ['煤球：…就一下哦', '哼，不许拍太用力（再拍）', '煤球的尾巴出卖了它'],
-        high: ['咕噜咕噜，不是我发出的', '煤球：明天…还许你拍', '今日班味：已清零'],
-        pet: ['煤球假装不在意，耳朵却软了', '煤球：哼…再摸一下'] } },
+      orange: { name: '橘子', tag: '温顺', chip: '温顺', lines: {
+        idle: '橘子正在晒太阳，拍拍她吧。',
+        first: '橘子：嗯？（慢慢回过头）',
+        mid: ['又软又弹，压力少了一半。', '橘子：再来一下嘛。', '肩膀是不是松下来了？'],
+        high: ['橘子舒服得摊成了一张猫饼。', '呼噜声已经开到最大。', '工作的事，晚点再说。'],
+        pet: ['橘子把头蹭进你的手心。', '橘子舒服得眯起了眼睛。'] } },
+      black: { name: '煤球', tag: '傲娇', chip: '傲娇', lines: {
+        idle: '煤球斜眼看着你：不许拍。',
+        first: '煤球：哼！谁允许你拍的？',
+        mid: ['煤球：……只许一下。', '煤球：哼，轻一点。', '煤球的尾巴出卖了它。'],
+        high: ['呼噜声？不是我发出的。', '煤球：明天……还可以再拍。', '今天的压力，已经清零。'],
+        pet: ['煤球假装不在意，耳朵却软了下来。', '煤球：哼……再摸一下。'] } },
     },
   },
   en: {
-    title: 'Pat the Cat Butt · Stress Gone in 30s', other: '中文',
-    ui: { ear: '🎧 Better with headphones', hint: '👋 Pat the butt<small>Drag to spin it around</small>', unit: 'pats', done: 'Stress cleared ✓ Share it', cred: 'Sound<br>credits',
-      share: 'Share my score', tip: 'Press and hold to save or send', save: 'Save image', close: 'Close' },
-    sound: 'Sound', purrOn: 'Turn on purring', soundOn: 'Sound on', saved: 'Saved ✓', cardAlt: 'Score card', combo: 'Combo ×', wrap: '✨ 30 seconds in: stress cleared',
-    pop: { soft: ['pat', 'boop', 'squish'], mid: ['bouncy!', 'boing~', 'squishy', 'pat!'], big: ['purrrr', 'so good~', 'BOING!!', 'again!'], face: ['nuzzle', 'purr~', '❤'], pet: ['pet pet', 'purr~', 'comfy'] },
-    feel: ['No pats yet. The cat is waiting', 'One pat. The stress is cracking', 'A few pats. Already lighter', 'Shoulders down. Clock out with dignity', 'Stress at zero. Soul back in body', 'The cat clocked in for you today'],
-    card: { pill: (d) => 'Stress Report · ' + d.toLocaleDateString('en-US', { month: 'short', day: 'numeric' }), title: 'Today I patted the cat butt', unit: (n) => (n === 1 ? 'time' : 'times'),
-      stamp: ['STRESS', 'OFF', 'LOW'], company: (c) => `${c.name} (${c.tag}) kept you company`, tryIt: (a) => `Your turn ▸ ${a}`, slogan: 'Pat the cat butt · stress gone in 30s',
-      file: (n) => `cat-butt-${n}-pats.png` },
+    title: 'Cat Game Online | Digital Cats · Real Purrs',
+    ui: { ear: 'Best with headphones', hint: 'Pat its butt. Hear that happy little purr.<small>Real cat recordings · drag sideways to turn the view</small>', pre: '', unit: 'pats', done: 'All done. Share your score.', cred: 'Audio credits',
+      share: 'Share with a friend', tip: 'Press and hold the image to save or share it.', save: 'Save image', close: 'Close' },
+    shareText: 'One little pat, one very happy purr. Your turn.',
+    sound: 'Sound', soundOn: 'Sound on', soundOff: 'Sound off', saved: 'Saved', cardAlt: 'Score card', combo: 'Combo ×', wrap: 'Thirty seconds. Feeling lighter already.',
+    pop: { soft: ['Pat.', 'Boop.', 'Soft.'], mid: ['So soft.', 'Bouncy.', 'Pat.', 'Nice.'], big: ['Purr.', 'So good.', 'Again.', 'Bliss.'], face: ['Nuzzle.', 'Purr.', '❤'], pet: ['Pet.', 'Purr.', 'Cozy.'] },
+    feel: ['No pats yet. The cat is waiting.', 'One pat. The stress is starting to ease.', 'A few pats. Already feeling lighter.', 'Shoulders down. You can leave work on time today.', 'Stress cleared. You feel like yourself again.', 'The cat took on the day’s stress for you.'],
+    card: { pill: (d) => 'Daily Unwind Report · ' + d.toLocaleDateString('en-US', { month: 'short', day: 'numeric' }), title: 'Today’s cat pats', unit: (n) => (n === 1 ? 'pat' : 'pats'),
+      stamp: ['STRESS', 'OFF', 'LOW'], company: (c) => `${c.name} (${c.tag}) kept you company.`, tryIt: (a) => `Pat it, it purrs ▸ ${a}`, slogan: 'Pat it, it purrs',
+      file: (n) => `cat-pats-${n}.png` },
     cats: {
-      orange: { name: 'Tangerine', tag: 'slow · squishy', chip: 'chill', lines: {
-        idle: 'Tangerine is sunbathing. Pat that butt',
-        first: 'Tangerine: hm…? (slowly turns around)',
-        mid: ['Soft and bouncy. Half the stress, gone', 'Tangerine: again. No rush', 'Shoulders dropping yet?'],
-        high: ['Tangerine has melted into a cat pancake', 'Purring at full volume', 'Boss? Never heard of them'],
-        pet: ['Tangerine headbutts your palm', 'Tangerine squints, very content'] } },
-      black: { name: 'Coal', tag: 'sassy · in denial', chip: 'sassy', lines: {
-        idle: 'Coal side-eyes you: no touching',
-        first: 'Coal: HEY. Who said you could?',
-        mid: ['Coal: …fine. Just one', 'Hmph. Not so hard (keeps patting)', 'Coal’s tail is giving it away'],
-        high: ['Purr purr. That wasn’t me', 'Coal: …you may pat again tomorrow', 'Office stress: cleared'],
-        pet: ['Coal acts cool, but the ears went soft', 'Coal: hmph… one more'] } },
+      orange: { name: 'Tangerine', tag: 'Easygoing', chip: 'Easygoing', lines: {
+        idle: 'Tangerine is sunbathing. Give her a pat.',
+        first: 'Tangerine: Hm? (She slowly turns around.)',
+        mid: ['Soft and bouncy. Half the stress is gone.', 'Tangerine: One more, please.', 'Are your shoulders loosening up?'],
+        high: ['Tangerine has melted into a cat pancake.', 'The purring is at full volume.', 'Work can wait.'],
+        pet: ['Tangerine nuzzles into your palm.', 'Tangerine squints with contentment.'] } },
+      black: { name: 'Coal', tag: 'Feisty', chip: 'Feisty', lines: {
+        idle: 'Coal is giving you side-eye. No touching.',
+        first: 'Coal: Hey! Who said you could do that?',
+        mid: ['Coal: Fine. Just one.', 'Coal: Hmph. Not so hard.', 'Coal’s tail is giving it away.'],
+        high: ['Purring? That wasn’t me.', 'Coal: You may pat me again tomorrow.', 'Stress level: cleared.'],
+        pet: ['Coal acts aloof, but those ears have gone soft.', 'Coal: Hmph. One more.'] } },
     },
   },
 };
@@ -102,10 +108,12 @@ function applyLang() {
   document.querySelectorAll('[data-t]').forEach((el) => { el.innerHTML = t.ui[el.dataset.t]; });
   document.querySelectorAll('.chip').forEach((b, k) => { b.innerHTML = `${CATS[k].name}<small>${CATS[k].chip}</small>`; });
   $('#mute').setAttribute('aria-label', t.sound);
-  $('#mute span').textContent = $('#mute').classList.contains('off') ? t.purrOn : t.soundOn;
+  $('#mute span').textContent = $('#mute').classList.contains('off') ? t.soundOn : t.soundOff;
   $('#cardimg').alt = t.cardAlt;
-  $('#lang').textContent = t.other;
+  document.querySelectorAll('#lang [data-l]').forEach((s) => s.classList.toggle('on', s.dataset.l === lang));
 }
+// "1 pat" / "5 pats"; Chinese has no plural
+function setUnit() { $('#unit').textContent = lang === 'en' && taps === 1 ? 'pat' : TX().ui.unit; }
 applyLang();
 
 // ───────────────────────── renderer / scene ─────────────────────────
@@ -462,23 +470,38 @@ function buildCat(cat) {
     const sole = ellipsoid(cat, foot, [0, 0, 0], PA, { w: 0, len: 0.6, col: cat.colW, bald: [[0, -0.08, 0.04, 0.075], [0, -0.06, -0.085, 0.07]] });
     cols.push({ c: foot.position.clone(), r: new THREE.Vector3(...PA) });
     proxies.push([foot.position.clone(), new THREE.Vector3(...PA)]);
+    const hp = new THREE.Group(); foot.add(hp); // hind beans, tucked away while the foot is planted
     const beanM = std(cat.bean, 0.55, { map: PAD_TEX, bumpMap: PAD_TEX, bumpScale: 1.2, clearcoat: 0.25, clearcoatRoughness: 0.45, sheen: 0.4, sheenColor: new THREE.Color(cat.bean).lerp(new THREE.Color('#ffffff'), 0.5) });
     const onSole = (x, z, sx, sz, th = 0.02) => { // pad bulging out of the sole at (x, z), tilted to the surface
       const y = -PA[1] * Math.sqrt(Math.max(0.02, 1 - (x / PA[0]) ** 2 - (z / PA[2]) ** 2));
       const n = new THREE.Vector3(x / PA[0] ** 2, y / PA[1] ** 2, z / PA[2] ** 2).normalize();
       const m = new THREE.Mesh(sphereGeo, beanM); m.scale.set(sx, th, sz);
       m.position.set(x, y, z).addScaledVector(n, th * 0.55); m.quaternion.setFromUnitVectors(new THREE.Vector3(0, -1, 0), n);
-      foot.add(m); return m;
+      hp.add(m); return m;
     };
-    onSole(0, 0.035, 0.064, 0.045, 0.024); // main pad body …
-    for (const lx of [-0.035, 0, 0.035]) onSole(lx * 1.15, 0.074, 0.028, 0.025, 0.022); // … and its three heel-side lobes
+    onSole(0, 0.035, 0.078, 0.056, 0.03); // main pad body …
+    for (const lx of [-0.035, 0, 0.035]) onSole(lx * 1.25, 0.08, 0.032, 0.028, 0.026); // … and its three heel-side lobes
     const toes = [[-0.06, -0.062], [-0.021, -0.09], [0.021, -0.09], [0.06, -0.062]].map(([x, z]) => {
-      const m = onSole(x, z, 0.026, 0.03, 0.023); return { m, x, z, p: m.position.clone() };
+      const m = onSole(x, z, 0.032, 0.036, 0.028); return { m, x, z, p: m.position.clone() };
     });
-    hind.push({ leg, ly: leg.position.y, foot, rest: foot.position.clone(), ankle: [PA[1], leg.position.z - foot.position.z], toes, sole });
+    hind.push({ leg, ly: leg.position.y, foot, rest: foot.position.clone(), ankle: [PA[1], leg.position.z - foot.position.z], toes, sole, hp });
     const fleg = col(add([s * 0.17 * w, 0.27 * L, -0.96], [0.1, 0.25 * L, 0.11], { w: 0, stripe: [0, 1, 0, 30] }));
-    const paw = add([s * 0.17 * w, 0.06, -1.02], [0.1, 0.065, 0.16], { w: 0, len: 0.6, col: cat.id === 'orange' ? cat.colW : null });
-    front.push([fleg, paw].map((m) => ({ m, y: m.position.y, z: m.position.z })));
+    const paw = add([s * 0.17 * w, 0.06, -1.02], [0.1, 0.065, 0.16], { w: 0, len: 0.6, col: cat.id === 'orange' ? cat.colW : null, bald: [[0, -0.06, 0.05, 0.085], [0, -0.055, -0.06, 0.08]] });
+    // front-paw beans live on the sole like the hind ones; they only show when the paw lifts and tips toward you
+    const FP = [0.1, 0.065, 0.16], pg = new THREE.Group(); pg.position.copy(paw.position); root.add(pg);
+    const fbeanM = std(cat.bean, 0.5, { map: PAD_TEX, bumpMap: PAD_TEX, bumpScale: 1.2, clearcoat: 0.3, clearcoatRoughness: 0.4, sheen: 0.4, sheenColor: new THREE.Color(cat.bean).lerp(new THREE.Color('#ffffff'), 0.5) });
+    const onFSole = (x, z, sx, sz, th) => {
+      const y = -FP[1] * Math.sqrt(Math.max(0.02, 1 - (x / FP[0]) ** 2 - (z / FP[2]) ** 2));
+      const n = new THREE.Vector3(x / FP[0] ** 2, y / FP[1] ** 2, z / FP[2] ** 2).normalize();
+      const m = new THREE.Mesh(sphereGeo, fbeanM); m.scale.set(sx, th, sz);
+      m.position.set(x, y, z).addScaledVector(n, th * 0.55); m.quaternion.setFromUnitVectors(new THREE.Vector3(0, -1, 0), n);
+      pg.add(m); return m;
+    };
+    onFSole(0, 0.062, 0.078, 0.062, 0.034); // palm pad
+    for (const lx of [-0.045, 0, 0.045]) onFSole(lx * 1.1, 0.118, 0.032, 0.026, 0.028); // heel lobes
+    for (const [x, z] of [[-0.066, -0.04], [-0.024, -0.078], [0.024, -0.078], [0.066, -0.04]]) onFSole(x, z, 0.032, 0.036, 0.03); // toe beans: kept under the paw so the front stays furry
+    paw.userData.pg = pg;
+    front.push([fleg, paw, pg].map((m) => ({ m, y: m.position.y, z: m.position.z })));
   }
   col(add([0, 0.8 * L, -0.8], [0.36 * w, 0.4, 0.32], { w: 0, tw: 1, stripe: [0, 1, 0, 18] }));
 
@@ -609,7 +632,7 @@ function makeState(cat) {
     lid: new Spring(140, 16, cat.lidRest), earL: new Spring(220, 9), earR: new Spring(220, 9),
     mouth: new Spring(240, 18), pop: new Spring(160, 11, 1),
     puff: 0, pf: 0, // startle size of the last slap (big when calm, small once it is enjoying it); pf = shown
-    blush: 0, heat: 0, happy: 0, lastTap: -9, lastPet: -9, blinkAt: 2, tailSway: 0, breath: 0,
+    blush: 0, heat: 0, happy: 0, lastTap: -9, lastPet: -9, purrGlow: 0, blinkAt: 2, tailSway: 0, breath: 0,
     hit: new THREE.Vector3(0, 0.6, 0.65),
   };
 }
@@ -688,9 +711,10 @@ function update(dt) {
   } else S.hy.t = 0.12 * Math.sin(T * 0.37);
   S.tailUp.t = clamp(h / 4, 0, 1);
   S.tailSway += dt * (cat.id === 'orange' ? 1.4 : 2.6) * (1 + h * 0.3);
-  // a real cat keeps purring for a while after you stop: the purr fades slower than the mood (~10 s from full)
-  S.purrGlow = Math.max(clamp(Math.max(S.happy * 1.1, petting ? 0.9 : 0, h / 6), 0, 1), (S.purrGlow || 0) - dt * 0.09);
-  audio.setPurr(S.purrGlow, h);
+  // background purr: swells slowly (~5 s to full) while you keep patting, fades slowly (~8 s) after you stop
+  const touched = T - Math.max(S.lastTap, S.lastPet) < 1.2;
+  S.purrGlow = clamp(S.purrGlow + (touched ? dt * 0.2 : -dt * 0.12), 0, 1);
+  audio.setPurr(S.purrGlow);
   // camera: drag inertia, then drift back to the butt view once left alone
   if (!dragging) {
     orbit.az += orbit.v * dt; orbit.v *= Math.exp(-dt * 4);
@@ -716,6 +740,7 @@ function applyState(dt = 1 / 60) {
   G.uSquash.value = soft(S.squash.x, 0.16, 0.3);
   G.uShear.value.set(soft(S.shX.x, 0.2, 0.2), soft(S.shZ.x, 0.2, 0.2));
   G.uLift.value = S.lift.x;
+  if (S.lift.x > 0.17 && !document.body.dataset.buttUp) document.body.dataset.buttUp = '1'; // first butt-raise: site.js may show the tip hint
   G.uHit.value.set(S.hit.x, S.hit.y, S.hit.z, S.dent.x);
   G.uRip.value.set(S.rip, S.ripPhase);
   G.uWind.value.set(soft(-S.shX.v * 0.02, 0.06, 0.06), soft(S.squash.v * 0.015, 0.06, 0.06), soft(-S.shZ.v * 0.02, 0.06, 0.06));
@@ -758,11 +783,16 @@ function applyState(dt = 1 / 60) {
     h.foot.position.set(h.rest.x, h.rest.y + lift + ky - (ky * c + kz * sn), h.rest.z + kz - (-ky * sn + kz * c));
     h.leg.position.y = h.ly + lift;
     const spread = 1 + 0.22 * s2;
+    h.hp.scale.setScalar(THREE.MathUtils.smoothstep(s2, 0.12, 0.5) * 0.999 + 0.001); // no pink peeking out under a planted foot
     h.toes.forEach((t) => { t.m.position.x = t.p.x * spread; t.m.position.z = t.p.z - 0.012 * s2; t.m.rotation.y = t.x * 3 * s2; });
   });
   rig.front.forEach((leg, k) => {
     const up = Math.max(0, Math.sin(S.kneadPh + k * Math.PI)) * 0.06 * st;
     leg.forEach((o) => { o.m.position.y = o.y + up; o.m.position.z = o.z - up * 0.5; });
+    // kneading: the raised paw tips sole-toward-you so the beans show, then presses back down
+    const f = Math.min(1, up / 0.06), a = 1.5 * f * f * (3 - 2 * f);
+    leg[1].m.rotation.x = -a; leg[2].m.rotation.x = -a;
+    leg[2].m.scale.setScalar(THREE.MathUtils.smoothstep(f, 0.12, 0.5) * 0.999 + 0.001); // beans stay tucked inside the paw until it lifts
   });
   // lid closure 0 = wide open … 1 = shut; the lids' front edges meet a little below centre
   const lc = clamp(S.lid.x, 0, 1);
@@ -824,13 +854,20 @@ function applyState(dt = 1 / 60) {
 }
 
 // ───────────────────────── audio ─────────────────────────
+// Everything is a real recording. Each pat plays a real pat on Kun's own cat (from the video the promo opens
+// with); now and then, every 5–6 pats (never closer than 2.5 s, however fast you pat), Kun's cat gives one short meow
+// (Coal's is the same voice a little lower). The purr is the main sound: it swells slowly while you pat and
+// fades slowly once you stop.
 const audio = (() => {
   const AC = window.AudioContext || window.webkitAudioContext;
   const ctx = AC ? new AC() : null;
-  let master, comp, purrBus, muted = true, live = new Set(), buffers = {}, purr = null, curPurrLevel = 0;
+  const VOL = 0.9;
+  let master, comp, purrBus, muted = false, buffers = {}, meow = null, lastMeow = '', lastPat = '', purr = null, curPurrLevel = 0;
+  // iOS: play through the ringer/silent switch like a media player would
+  try { if (navigator.audioSession) navigator.audioSession.type = 'playback'; } catch (e) { /* not supported */ }
   if (ctx) {
     comp = ctx.createDynamicsCompressor(); comp.threshold.value = -14; comp.ratio.value = 4; comp.release.value = 0.2;
-    master = ctx.createGain(); master.gain.value = 0; master.connect(comp); comp.connect(ctx.destination);
+    master = ctx.createGain(); master.gain.value = VOL; master.connect(comp); comp.connect(ctx.destination);
     // phone speakers can't reproduce the ~25 Hz rumble: saturate the low band into harmonics and add them
     // back in the 300–900 Hz range, so the purr's flutter is still audible without headphones
     purrBus = ctx.createGain(); purrBus.connect(master);
@@ -842,18 +879,14 @@ const audio = (() => {
     const mid = ctx.createGain(); mid.gain.value = 0.32;
     purrBus.connect(lp); lp.connect(sat); sat.connect(bp); bp.connect(mid); mid.connect(master);
   }
-  const noise = ctx && (() => {
-    const b = ctx.createBuffer(1, ctx.sampleRate * 0.3, ctx.sampleRate), d = b.getChannelData(0);
-    let last = 0; for (let i = 0; i < d.length; i++) { last = 0.97 * last + 0.03 * (Math.random() * 2 - 1); d[i] = last * 6; }
-    return b;
-  })();
+  const MEOWS = ['m1', 'm2', 'm3', 'm4'], PATS = ['p1', 'p2', 'p3', 'p4', 'p5'];
 
   async function load(name, url) {
     const r = await fetch(url); const ab = await r.arrayBuffer();
     buffers[name] = await new Promise((res, rej) => ctx.decodeAudioData(ab, res, rej));
   }
   const ready = ctx ? Promise.all([
-    ...CATS.map((c) => load(c.id, c.purr)), load('meow', 'audio/meow.mp3'), load('chirp', 'audio/chirp.mp3'),
+    ...CATS.map((c) => load(c.id, c.purr)), ...[...MEOWS, ...PATS].map((m) => load(m, `audio/kun/${m}.mp3`)),
   ]).catch((e) => console.warn('audio', e)) : Promise.resolve();
 
   // The purr is never a loop. Each recording is cut into its real breath cycles (quiet inhale → loud exhale),
@@ -866,7 +899,7 @@ const audio = (() => {
     if (purr) stopPurr(0.08);
     const g = ctx.createGain(); g.gain.value = 0; g.connect(purrBus);
     const cuts = CATS.find((c) => c.id === id).cuts;
-    purr = { g, id, cuts, next: ctx.currentTime + 0.05, last: -1, srcs: [], sched: [], heat: 0 }; curPurrLevel = 0;
+    purr = { g, id, cuts, next: ctx.currentTime + 0.05, last: -1, srcs: [], sched: [] }; curPurrLevel = 0;
   }
   function stopPurr(tc) {
     const t = ctx.currentTime, old = purr; purr = null;
@@ -880,7 +913,7 @@ const audio = (() => {
       let k; do k = Math.floor(Math.random() * (P.cuts.length - 1)); while (k === P.last && P.cuts.length > 2);
       P.last = k;
       const a = P.cuts[k], b = P.cuts[k + 1];
-      const rate = rnd(0.95, 1.05) * (1 + clamp(P.heat / 12, 0, 1) * 0.05);
+      const rate = rnd(0.95, 1.05);
       const s = ctx.createBufferSource(); s.buffer = buffers[P.id]; s.playbackRate.value = rate;
       const e = ctx.createGain(), xf = XF / rate, dur = (b - a + XF) / rate, t0 = P.next - xf / 2;
       e.gain.setValueAtTime(0, 0);
@@ -893,7 +926,12 @@ const audio = (() => {
       P.next += (b - a) / rate + (Math.random() < 0.2 ? rnd(0.03, 0.08) : 0); // now and then a slightly longer breath
     }
   }
-  function oneShot(node, dur) { live.add(node); setTimeout(() => live.delete(node), dur * 1000 + 50); }
+  // the first sound can land while the context is still waking up from that same touch: play it once it runs
+  function whenRunning(fn) {
+    if (!ctx || muted) return false;
+    if (ctx.state !== 'running') { ctx.resume().then(() => { if (ctx.state === 'running' && !muted) fn(); }); return false; }
+    return true;
+  }
 
   return {
     ctx, ready,
@@ -903,14 +941,12 @@ const audio = (() => {
       if (!purr || purr.id !== rig.cat.id) ready.then(() => { if (!purr || purr.id !== rig.cat.id) startPurr(rig.cat.id); });
     },
     switchCat() { if (ctx && purr) ready.then(() => startPurr(rig.cat.id)); },
-    setPurr(level, heat) {
+    // level 0..1, already smoothed by the caller (slow rise while patting, slow fade after)
+    setPurr(level) {
       if (!purr || muted || ctx.state !== 'running') return;
-      purr.heat = heat; schedulePurr();
-      const target = level <= 0.01 ? 0 : 0.18 + 0.75 * level ** 0.8;
-      if (Math.abs(target - curPurrLevel) > 0.01) {
-        curPurrLevel = target;
-        purr.g.gain.setTargetAtTime(target, ctx.currentTime, target > 0 ? 0.12 : 0.6);
-      }
+      schedulePurr();
+      const target = level <= 0.01 ? 0 : level;
+      if (Math.abs(target - curPurrLevel) > 0.01) { curPurrLevel = target; purr.g.gain.setTargetAtTime(target, ctx.currentTime, 0.15); }
     },
     // 0..1 position inside the breath cycle that is sounding right now (-1 when silent)
     breathPhase() {
@@ -918,29 +954,35 @@ const audio = (() => {
       const t = ctx.currentTime, c = purr.sched.find((o) => t >= o.t && t < o.t + o.d);
       return c ? (t - c.t) / c.d : -1;
     },
-    pat(power) {
-      if (!ctx || muted || ctx.state !== 'running') return;
+    // one real pat sample on every pat; withMeow adds one short meow (it replaces a meow that is still sounding).
+    // Returns how long the meow lasts (0 when none), for the mouth.
+    pat(power, cat, withMeow) {
+      if (!whenRunning(() => this.pat(power, cat, withMeow))) return 0;
       const t = ctx.currentTime;
-      const n = ctx.createBufferSource(); n.buffer = noise; n.playbackRate.value = rnd(0.8, 1.2);
-      const f = ctx.createBiquadFilter(); f.type = 'lowpass'; f.frequency.value = rnd(900, 1500) * (0.9 + power * 0.3); f.Q.value = 0.8;
-      const g = ctx.createGain(); g.gain.setValueAtTime(0, t); g.gain.linearRampToValueAtTime(0.9 * power, t + 0.003); g.gain.exponentialRampToValueAtTime(0.001, t + 0.11);
-      n.connect(f); f.connect(g); g.connect(master); n.start(t); n.stop(t + 0.14); oneShot(n, 0.14);
-      const o = ctx.createOscillator(); o.frequency.setValueAtTime(150 * rnd(0.9, 1.1), t); o.frequency.exponentialRampToValueAtTime(58, t + 0.09);
-      const og = ctx.createGain(); og.gain.setValueAtTime(0.75 * power, t); og.gain.exponentialRampToValueAtTime(0.001, t + 0.13);
-      o.connect(og); og.connect(master); o.start(t); o.stop(t + 0.14); oneShot(o, 0.14);
-    },
-    voice(name, rate) {
-      if (!ctx || muted || !buffers[name] || ctx.state !== 'running') return 0;
-      const s = ctx.createBufferSource(); s.buffer = buffers[name]; s.playbackRate.value = rate;
-      const g = ctx.createGain(); g.gain.value = 0.75; s.connect(g); g.connect(master); s.start();
-      const d = buffers[name].duration / rate; oneShot(s, d); return d;
+      const pk = pick(PATS.filter((m) => m !== lastPat && buffers[m])); lastPat = pk;
+      if (pk) {
+        const s = ctx.createBufferSource(); s.buffer = buffers[pk]; s.playbackRate.value = rnd(0.94, 1.06);
+        const g = ctx.createGain(); g.gain.value = 0.55 * power;
+        s.connect(g); g.connect(master); s.start(t);
+      }
+      if (!withMeow) return 0;
+      const m = pick(MEOWS.filter((x) => x !== lastMeow && buffers[x]));
+      if (!m) return 0;
+      if (meow) { const h = meow; h.g.gain.cancelScheduledValues(t); h.g.gain.setValueAtTime(h.g.gain.value, t); h.g.gain.linearRampToValueAtTime(0, t + 0.01); try { h.s.stop(t + 0.012); } catch (e) { /* ended */ } }
+      lastMeow = m;
+      const rate = cat.meow.rate * rnd(0.98, 1.02);
+      const s = ctx.createBufferSource(); s.buffer = buffers[m]; s.playbackRate.value = rate;
+      const mg = ctx.createGain(); mg.gain.value = cat.meow.gain;
+      s.connect(mg); mg.connect(master); s.start(t + 0.03);
+      meow = { s, g: mg }; s.onended = () => { if (meow && meow.s === s) meow = null; };
+      return buffers[m].duration / rate;
     },
     setMuted(m) {
       muted = m; if (!ctx) return;
       const t = ctx.currentTime;
-      master.gain.cancelScheduledValues(t); master.gain.setTargetAtTime(m ? 0 : 1, t, 0.012);
+      master.gain.cancelScheduledValues(t); master.gain.setTargetAtTime(m ? 0 : VOL, t, 0.012);
       if (m) {
-        live.forEach((n) => { try { n.stop(t + 0.06); } catch (e) { /* already stopped */ } }); live.clear();
+        if (meow) { try { meow.s.stop(t + 0.06); } catch (e) { /* ended */ } meow = null; }
         if (purr) { const id = purr.id; stopPurr(0.012); startPurr(id); } // drop every queued breath: nothing replays on unmute
       }
     },
@@ -962,7 +1004,7 @@ function haptic(ms) {
 
 // ───────────────────────── fx / ui ─────────────────────────
 const fx = $('#fx');
-let taps = 0, combo = 0, lastTapAt = 0, firstTap = true;
+let taps = 0, combo = 0, lastTapAt = 0, firstTap = true, meowIn = 0, lastMeowAt = -99;
 const stats = { down: 0, cancel: 0, slap: 0, pet: 0 };
 
 function popText(x, y, txt, cls = '') {
@@ -984,7 +1026,7 @@ function hearts(n) {
 }
 function setLine(t) { const m = $('#line'); m.textContent = t; m.classList.remove('flash'); void m.offsetWidth; m.classList.add('flash'); }
 function bumpCount() {
-  const c = $('#num'); c.textContent = taps; c.classList.remove('bump'); void c.offsetWidth; c.classList.add('bump');
+  const c = $('#num'); c.textContent = taps; c.classList.remove('bump'); void c.offsetWidth; c.classList.add('bump'); setUnit();
   const cb = $('#combo');
   if (combo >= 3) { cb.textContent = TX().combo + combo; cb.classList.add('on'); cb.classList.remove('bump'); void cb.offsetWidth; cb.classList.add('bump'); }
 }
@@ -997,7 +1039,8 @@ const ndc = new THREE.Vector2();
 function slap(px, py, hitPoint) {
   const cat = rig.cat, now = performance.now() / 1000;
   taps++; stats.slap++;
-  combo = now - lastTapAt < 0.75 ? combo + 1 : 1; lastTapAt = now;
+  const gap = now - lastTapAt;
+  combo = gap < 0.75 ? combo + 1 : 1; lastTapAt = now;
   const pt = lerp(1, 0.4, S.happy); // fur puffs on impact; less once it is enjoying it
   S.puff = T - S.lastTap < 1.5 ? Math.max(S.puff * 0.9, pt) : pt;
   S.lastTap = T; S.heat = Math.min(S.heat + 1, 14);
@@ -1025,10 +1068,14 @@ function slap(px, py, hitPoint) {
   };
   cat.spring.delay ? setTimeout(react, cat.spring.delay) : react();
 
-  audio.pat(p);
+  // one short meow every 5–6 pats; at least 2.5 s apart, so patting faster never makes the cat meow faster
+  const withMeow = --meowIn <= 0 && now - lastMeowAt >= 2.5;
+  if (withMeow) { meowIn = 5 + (Math.random() < 0.5 ? 0 : 1); lastMeowAt = now; }
+  const said = audio.pat(p * 0.8, cat, withMeow);
   haptic(combo > 5 ? 22 : 14);
-  if (firstTap) { firstTap = false; $('#hint').classList.add('gone'); setTimeout(() => sayMeow(cat.id === 'black' ? 'chirp' : 'meow'), cat.spring.delay + 120); setLine(cat.lines.first); }
-  else if (combo === 8 || combo === 20 || (combo > 20 && combo % 15 === 0)) { sayMeow('meow'); hearts(5); }
+  if (said) mouthOpen(said * 900);
+  if (firstTap) { firstTap = false; $('#hint').classList.add('gone'); setLine(cat.lines.first); }
+  else if (combo === 8 || combo === 20 || (combo > 20 && combo % 15 === 0)) hearts(5);
   else if (combo === 4) hearts(2);
 
   const P = TX().pop, words = combo < 4 ? P.soft : combo < 9 ? P.mid : P.big;
@@ -1038,19 +1085,16 @@ function slap(px, py, hitPoint) {
   if (taps === 5 || taps === 15 || (taps > 15 && taps % 12 === 0)) setLine(pick(combo >= 8 ? cat.lines.high : cat.lines.mid));
 }
 
-function sayMeow(kind) {
-  const cat = rig.cat;
-  const rate = (kind === 'chirp' ? cat.chirpRate : cat.meowRate) * rnd(0.96, 1.04);
-  const d = audio.voice(kind, rate) || 0.35;
-  S.mouth.t = 1; setTimeout(() => { S.mouth.t = 0; }, d * 800);
-}
+// mouth opens for the meow (pats) or a silent "mrrp" (pets)
+let mouthTimer = 0;
+function mouthOpen(ms) { S.mouth.t = 1; clearTimeout(mouthTimer); mouthTimer = setTimeout(() => { S.mouth.t = 0; }, ms); }
 
 function pet(face, px, py) {
   stats.pet++; $('#hint').classList.add('gone'); // petting is its own reaction; only slaps count toward "拍了 N 下"
   S.lastPet = T; S.heat = Math.min(S.heat + 0.6, 14); S.lookUntil = T + 1.4;
   S.tilt.v += face ? (Math.random() < 0.5 ? -3 : 3) : 0; S.bob.v -= face ? 0.3 : 1.2;
   S.earL.v -= 5; S.earR.v -= 5; S.blush = Math.min(1, S.blush + 0.5);
-  if (Math.random() < 0.3) sayMeow('chirp');
+  if (Math.random() < 0.3) mouthOpen(200);
   haptic(8);
   popText(px, py - 20, pick(face ? TX().pop.face : TX().pop.pet), 'soft');
   if (Math.random() < 0.4) setLine(pick(rig.cat.lines.pet));
@@ -1098,6 +1142,7 @@ function onMove(e) {
   g.lx = e.clientX; g.ly = e.clientY;
 }
 function onUp(e) {
+  audio.unlock(); // iOS only lets a touch *end* start audio
   const g = touches.get(e.pointerId);
   touches.delete(e.pointerId);
   if (g && g.drag && performance.now() - (g.lt || 0) > 90) orbit.v = 0; // held still before letting go: no fling
@@ -1133,20 +1178,20 @@ function useCat(i) {
   audio.switchCat();
 }
 document.querySelectorAll('.chip').forEach((b, k) => b.addEventListener('click', () => { audio.unlock(); if (k !== ci) useCat(k); }));
-$('#lang').addEventListener('click', () => {
-  const ls = Object.keys(COPY); lang = ls[(ls.indexOf(lang) + 1) % ls.length];
+document.querySelectorAll('#lang [data-l]').forEach((s) => s.addEventListener('click', () => {
+  if (s.dataset.l === lang) return;
+  lang = s.dataset.l;
   try { localStorage.setItem('lang', lang); } catch (e) { /* private mode */ }
-  applyLang(); setLine(rig.cat.lines.idle);
-});
-// muted by default (meetings, open offices); one obvious button turns the purr on
-let earTimer = 0;
+  applyLang(); setUnit(); setLine(rig.cat.lines.idle);
+}));
+// sound is on from the start (it sounds on the first pat, the earliest moment browsers allow); one button mutes it
+let earTimer = setTimeout(() => $('#ear').classList.add('gone'), 6000);
 $('#mute').addEventListener('click', () => {
   if (audio.muted) audio.unlock();
   audio.setMuted(!audio.muted);
   const m = audio.muted;
   $('#mute').classList.toggle('off', m);
-  $('#mute').classList.remove('nudge');
-  $('#mute span').textContent = m ? TX().purrOn : TX().soundOn;
+  $('#mute span').textContent = m ? TX().soundOn : TX().soundOff;
   $('#ear').classList.remove('gone'); clearTimeout(earTimer);
   if (!m) earTimer = setTimeout(() => $('#ear').classList.add('gone'), 4500);
 });
@@ -1157,7 +1202,7 @@ let playT = 0, wrapped = false;
 function wrapUp() {
   wrapped = true;
   S.heat = Math.max(S.heat, 8); S.lastPet = T;
-  hearts(6); sayMeow('meow');
+  hearts(6); mouthOpen(500);
   setLine(TX().wrap);
   const d = $('#done'); d.classList.add('on');
   $('#sharebtn').classList.add('glow');
@@ -1291,7 +1336,7 @@ $('#savebtn').addEventListener('click', async () => {
   const name = TX().card.file(taps);
   const file = new File([cardBlob], name, { type: 'image/png' });
   if (navigator.canShare && navigator.canShare({ files: [file] }) && /Mobi|Android|iPhone|iPad/.test(navigator.userAgent)) {
-    try { await navigator.share({ files: [file] }); return; } catch (e) { if (e.name === 'AbortError') return; }
+    try { await navigator.share({ files: [file], text: TX().shareText + ' https://cat.kunkunzheten.top/' }); return; } catch (e) { if (e.name === 'AbortError') return; }
   }
   const a = document.createElement('a'); a.href = URL.createObjectURL(cardBlob); a.download = name;
   document.body.appendChild(a); a.click(); a.remove();
