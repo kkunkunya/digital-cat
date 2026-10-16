@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"/>
+<title>数字猫猫·三遍整合·1015</title>
+<style>
+:root{
+  --bg:#0f1419; --card:#1a222c; --card2:#232d39; --ink:#eef3f8; --muted:#9aabbc;
+  --line:#2e3a48; --hot:#ffb454; --ok:#5fd39a; --cut:#ff7a7a; --link:#7ab8ff;
+  --chip:#2a3542;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+body{background:var(--bg);color:var(--ink);font:16px/1.55 -apple-system,BlinkMacSystemFont,"PingFang SC","Noto Sans SC","Microsoft YaHei",sans-serif;padding:14px 12px 56px;max-width:640px;margin:0 auto}
+h1{font-size:1.45rem;line-height:1.3;margin:4px 0 8px;letter-spacing:-.02em}
+h2{font-size:1.05rem;margin:28px 0 10px;padding-left:10px;border-left:4px solid var(--hot);color:var(--hot)}
+.meta{color:var(--muted);font-size:.78rem;margin-bottom:10px}
+.tag{display:inline-block;font-size:.7rem;padding:3px 10px;border-radius:999px;border:1px solid var(--line);color:var(--muted);margin:2px 4px 2px 0;background:var(--chip)}
+.tag.warn{border-color:var(--hot);color:var(--hot)}
+.tag.ok{border-color:var(--ok);color:var(--ok)}
+.hero{background:linear-gradient(145deg,#1c2834,#2a1f2e 70%);border:1px solid #3d4e62;border-radius:18px;padding:18px 16px;margin:10px 0 14px}
+.hero .sell{font-size:1.35rem;font-weight:800;line-height:1.35;color:#fff;margin-bottom:10px}
+.hero .sell em{color:var(--hot);font-style:normal}
+.hero .one{font-size:1.02rem;font-weight:700;line-height:1.55;margin:8px 0}
+.hero .meta-line{color:var(--muted);font-size:.88rem;margin-top:10px;line-height:1.5}
+.card{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:14px;margin:10px 0}
+.bar{display:grid;grid-template-columns:1fr;gap:8px;margin:8px 0}
+.bar .item{background:var(--card2);border-radius:12px;padding:12px 14px;border:1px solid var(--line);display:flex;gap:12px;align-items:flex-start}
+.bar .n{flex:0 0 28px;height:28px;border-radius:8px;background:var(--hot);color:#1a1208;font-weight:800;display:flex;align-items:center;justify-content:center;font-size:.9rem}
+.bar b{display:block;font-size:.95rem}
+.bar span{color:var(--muted);font-size:.82rem}
+.twrap{overflow-x:auto;-webkit-overflow-scrolling:touch;border-radius:12px;border:1px solid var(--line);margin:8px 0}
+table{width:100%;border-collapse:collapse;font-size:.82rem;background:var(--card);min-width:480px}
+th,td{padding:10px 9px;text-align:left;vertical-align:top;border-bottom:1px solid var(--line)}
+th{background:var(--card2);color:var(--muted);font-weight:600;white-space:nowrap}
+tr:last-child td{border-bottom:none}
+td.bet{color:var(--hot);font-weight:700}
+a{color:var(--link);word-break:break-all}
+ul.check,ul.cut{list-style:none;padding:0;margin:6px 0}
+ul.check li,ul.cut li{padding:10px 12px;margin:6px 0;border-radius:12px;background:var(--card);border:1px solid var(--line);font-size:.92rem;line-height:1.45}
+ul.check li{border-left:4px solid var(--ok)}
+ul.cut li{border-left:4px solid var(--cut);color:#ffc9c9}
+ul.check li b,ul.cut li b{color:#fff}
+.q{background:var(--card2);border-left:3px solid var(--hot);padding:10px 12px;border-radius:0 12px 12px 0;margin:8px 0;font-size:.9rem}
+.q .src{display:block;margin-top:6px;font-size:.75rem;color:var(--muted)}
+.miss{color:var(--cut);font-size:.75rem}
+.todo{background:#fff;color:#111;border-radius:16px;padding:16px;margin:16px 0}
+.todo h3{font-size:1rem;margin:0 0 8px;color:#111}
+.todo .col{margin:10px 0}
+.todo .yes{color:#0a6b3c;font-weight:700}
+.todo .no{color:#8a3030;font-weight:700}
+.todo ul{margin:4px 0 0 1.1em;font-size:.9rem;color:#333}
+.caveat{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+.caveat .c{background:rgba(255,122,122,.08);border:1px solid rgba(255,122,122,.35);border-radius:12px;padding:12px;font-size:.85rem}
+.caveat .c b{display:block;color:var(--cut);margin-bottom:4px}
+.foot{margin-top:24px;padding-top:12px;border-top:1px solid var(--line);color:var(--muted);font-size:.75rem;line-height:1.6}
+.pm{background:var(--card2);border:1px dashed var(--hot);border-radius:12px;padding:12px;font-size:.85rem;color:var(--ink);margin:12px 0;line-height:1.65}
+@media(max-width:520px){
+  .caveat{grid-template-columns:1fr}
+  h1{font-size:1.25rem}
+  .hero .sell{font-size:1.2rem}
+  table{min-width:420px}
+}
+</style>
+</head>
+<body>
+
+<p class="meta">给 Kun · 经理群 · 2026-10-15 · Claude + Codex + OpenCode 三遍合并</p>
+<span class="tag warn">还没定稿上线，喂重做用</span>
+<span class="tag">卖点锁死</span>
+<span class="tag">视觉优先 · 少字</span>
+
+<div class="hero">
+  <div class="sell">拍一下猫屁屁，<em>30 秒班味清零</em></div>
+  <p class="one">结论：市面把「呼噜声 / 摸猫原型 / 点按计数」拆成三块；我们押<strong>手机网页一拍就爽 + 会呼吸的呼噜 + 拍了 N 下能晒</strong>——没人同时做到。</p>
+  <p class="meta-line">比喻：不是再养一只电子宠物，是门口那只会拱你腿的猫——摸一下就爽，爽完可以走。</p>
+</div>
+
+<h2>重做验收线（已定）</h2>
+<div class="bar">
+  <div class="item"><div class="n">1</div><div><b>Wow 感</b><span>像近期 3D/动效爆帖那种「第一眼想录」的视觉冲击</span></div></div>
+  <div class="item"><div class="n">2</div><div><b>拍 → 想录屏</b><span>拍一下就手痒想录发给朋友（核心一击成败线）</span></div></div>
+  <div class="item"><div class="n">3</div><div><b>真猫呼噜感</b><span>听着像真猫在喘，不是循环电子音</span></div></div>
+</div>
+
+<h2>空位 vs 市场（一眼表）</h2>
+<div class="twrap">
+<table>
+  <thead><tr><th>类型</th><th>代表</th><th>有</th><th>缺</th></tr></thead>
+  <tbody>
+    <tr><td>只听呼噜</td><td><a href="https://purrli.com/">Purrli</a></td><td>顶级呼噜引擎；会催你继续</td><td>不能拍；无分享图；外放难出低频</td></tr>
+    <tr><td>能摸原型</td><td><a href="https://krisikris.itch.io/pat-a-cat">Pat-a-Cat</a> / itch 摸猫群</td><td>验证「摸着爽」</td><td>下载/Jam 糙；不竖屏；无打磨分享</td></tr>
+    <tr><td>点按计数</td><td><a href="https://www.dianzimuyu.com/">电子木鱼站群</a></td><td>点一下 +1 循环已被验证</td><td>无生命感；红海工具站</td></tr>
+    <tr><td class="bet">我们的押注</td><td class="bet">数字猫猫网页</td><td class="bet" colspan="2">手机直开 · 拍屁屁爽感 · 会呼吸呼噜 · 「拍了 N 下」竖图</td></tr>
+  </tbody>
+</table>
+</div>
+
+<h2>v1 必须有（三遍去重 · ≤10）</h2>
+<ul class="check">
+  <li><b>3 秒可玩</b>：打开即猫；零注册 / 零教程 / 零弹窗；首拍 &lt;1 秒有反馈</li>
+  <li><b>拍屁屁三件套同帧</b>：压扁回弹（squash &amp; stretch）+ 肉感「啪」+ 呼噜脉冲；视觉约 100ms 内起跳</li>
+  <li><b>摸头 ≠ 拍屁屁</b>：两种回应静音也能分清（慢贴手 vs 短促弹）</li>
+  <li><b>会呼吸的呼噜</b>：禁一段采样死循环；响度随拍起伏</li>
+  <li><b>默认静音 + 醒目开关</b>：开会场景；静音时动画仍要「读得懂」</li>
+  <li><b>竖版分享图</b>：猫 +「今天拍了 N 下」+ 感受文案（非分数）+ 一键保存/系统分享</li>
+  <li><b>猫有小情绪</b>：连拍甩尾/回头；停手可恢复——不是沙包（与木鱼的本质差）</li>
+  <li><b>触碰热区清楚</b>：头 / 臀宽松可点；点空白不误触</li>
+  <li><b>自由离开</b>：不拦退出、不惩罚缺席、不弹分享门槛</li>
+  <li><b>iOS 兜底</b>：无系统震动 → 视觉+音效独立扛；震动仅 Android 增强</li>
+</ul>
+
+<div class="caveat">
+  <div class="c"><b>⚠ iOS 震动</b>Safari 不支持 <code>navigator.vibrate</code>（MDN Limited）。别把爽感赌在震动上。</div>
+  <div class="c"><b>⚠ 呼噜低频</b>手机外放很难出真猫低频（Purrli 自述要耳机）。首屏轻提示「戴耳机更爽」。</div>
+</div>
+
+<h2>必须砍（v1 一律不做）</h2>
+<ul class="cut">
+  <li><b>AI 聊天猫 / 会说话</b>——变成 ChatGPT 壳，且有成本</li>
+  <li><b>登录 / 账号 / 云存档</b>——localStorage 够用</li>
+  <li><b>排行榜 / 好友 / 多人世界</b>——30 秒解压容不下社交</li>
+  <li><b>养成：喂食 / 金币 / 抽卡 / 签到 / 多猫收集</b>——先过「这一下爽不爽」</li>
+  <li><b>自动挂机拍</b>——爽感在手上，挂机抽魂</li>
+  <li><b>番茄钟 / 催拍 / 推送 / 桌面常驻</b>——留给 v2</li>
+  <li><b>App / 小程序 / 会员订阅 / AR</b>——方向是 ToC 网页；收款墙以后再说</li>
+  <li><b>新手教程弹窗</b>——一只猫一个屁屁，不需要</li>
+</ul>
+
+<h2>证据（只留有链接的原话）</h2>
+<div class="card">
+  <div class="q">“Turning this on for even five minutes makes the tension spiral out of my shoulders.”
+    <span class="src">Purrli 用户证言 · <a href="https://www.goodnewsnetwork.org/website-lets-you-listen-to-cat-purrs-whenever-youre-stressed-and-it-can-calm-your-kitty-too/">Good News Network</a></span>
+  </div>
+  <div class="q">“What a nice game, i feel that my anxiety is leaving my body”
+    <span class="src">itch · <a href="https://krisikris.itch.io/pat-a-cat">Pat-a-Cat 评论</a></span>
+  </div>
+  <div class="q">“Simple and silly but weirdly addictive.”
+    <span class="src">WoolyLlamas · <a href="https://www.reddit.com/r/CozyGamers/comments/1wouzn6/comment/pbqyn95/">r/CozyGamers</a></span>
+  </div>
+  <div class="q">“The MEOW made me jump”
+    <span class="src">→ 默认静音 · <a href="https://www.reddit.com/r/InternetIsBeautiful/comments/y2olxq/comment/is4w4bp/">Reddit</a></span>
+  </div>
+  <div class="q">“They're annoying me so none.”
+    <span class="src">→ 玩完就走，别常驻催 · <a href="https://www.reddit.com/r/CozyGamers/comments/1wouzn6/comment/pbvauvw/">Reddit</a></span>
+  </div>
+  <div class="q">亲手撸猫狗 10 分钟 → 唾液皮质醇显著下降，优于只看照片/视频
+    <span class="src"><a href="https://news.wsu.edu/press-release/2019/07/15/study-demonstrates-stress-reduction-benefits-petting-dogs-cats/">WSU 新闻稿</a> · <a href="https://journals.sagepub.com/doi/full/10.1177/2332858419852592">期刊</a></span>
+  </div>
+  <p class="miss" style="margin-top:8px">查不到：YouTube「cat purring 10h」精确播放量；Chrome 扩展「Meow, The Cat Pet」精确用户数；中文上班族付费/次日回访数据（三遍均未核到）。</p>
+</div>
+
+<div class="todo">
+  <h3>要你做的 / 不用你做什么</h3>
+  <div class="col"><span class="yes">要你做的</span>
+    <ul>
+      <li>扫一眼本页结论 + 验收线，回「按这个喂重做」或只改不顺眼的一句</li>
+      <li>有空丢几段真猫屁屁短视频到群（个人号试水温用）</li>
+    </ul>
+  </div>
+  <div class="col"><span class="no">不用你做什么</span>
+    <ul>
+      <li>不用读三遍原文、不用改代码、不用定收款/墙、不用装 App</li>
+      <li>站、手感迭代、分享图打磨——程序侧跟；头脑风暴只喂重做</li>
+    </ul>
+  </div>
+</div>
+
+<h2>给 PM 粘贴（一段话）</h2>
+<div class="pm" id="pm-paste">三遍头脑风暴已合并成一页：方向不推翻，卖点仍锁「拍一下猫屁屁，30 秒班味清零」。相对初版样机，重做按三条验收线加码——①视觉要有 3D/动效爆帖那种 wow；②拍一下就想录屏转发；③呼噜要像真猫呼吸而非循环电子音。市场空位明确：Purrli 有声无拍、itch 摸猫有摸无打磨、电子木鱼有计数无生命感；我们只押「手机网页拍爽 + 会呼吸呼噜 + 拍 N 下竖图」。v1 必须有清单已去重到 10 条（含 iOS 无震动兜底、外放低频难出要提示耳机）；登录/AI 聊天/养成/榜单/催拍等一律砍。本页标注「还没定稿上线，喂重做用」，请直接喂给重做团队当验收对照，不必再读三遍原文。</div>
+
+<div class="foot">
+  源文件：Claude 第1遍 · Codex 第2遍 · OpenCode 第3遍（由 agent-tools 最新下载去 wrapper 写入）<br>
+  合并原则：卖点不改；证据只留带链接原话；技术坑（震动/低频）保留；字少表大，给老板扫。<br>
+  生成：2026-10-15（America/Chicago）
+</div>
+
+</body>
+</html>

@@ -1,0 +1,9 @@
+# Audio credits
+
+- `purr_orange.mp3` — from "Whiskers' purr edit.ogg", Wikimedia Commons, Adam Cuerden (edit by X!), Public Domain. Trimmed, levelled, EQ'd.
+- `purr_black.mp3` — from "Purring cat.oga", Wikimedia Commons, Mysid, Public Domain. Trimmed, EQ'd.
+- `meow.mp3`, `chirp.mp3` — from "Meow.ogg", Wikimedia Commons, Dcrosby at English Wikipedia, CC BY-SA 3.0 (https://creativecommons.org/licenses/by-sa/3.0/). High-passed; chirp is the first 0.26 s with a fade. Derivatives are shared under CC BY-SA 3.0.
+
+Pat sound is synthesized in code (no sample).
+
+The purr is never played as a loop: `src/main.js` cuts each recording into its own inhale/exhale breath cycles (`cuts`) and re-sequences them in random order with per-breath rate jitter, equal-power crossfades and occasional short pauses.

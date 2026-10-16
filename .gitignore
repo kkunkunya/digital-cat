@@ -1,0 +1,8 @@
+.DS_Store
+server.log
+server.pid
+_npm/
+review/
+_raw_audio/
+*.bak-*
+node_modules/

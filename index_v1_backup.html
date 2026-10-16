@@ -1,0 +1,198 @@
+<!doctype html>
+<html lang="zh">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no,viewport-fit=cover">
+<title>拍猫屁屁 · 30 秒班味清零</title>
+<style>
+*{box-sizing:border-box;-webkit-tap-highlight-color:transparent;user-select:none;-webkit-user-select:none;touch-action:manipulation}
+html,body{margin:0;height:100%;overflow:hidden;font-family:-apple-system,"PingFang SC",sans-serif;background:var(--bg);transition:background .4s}
+:root{--bg:#fde9d0}
+#app{position:fixed;inset:0;display:flex;flex-direction:column;align-items:center}
+h1{margin:max(18px,env(safe-area-inset-top)) 0 0;font-size:20px;color:#5a3a22;letter-spacing:1px}
+#sub{font-size:13px;color:#8a6446;margin-top:4px}
+#stage{flex:1;width:100%;max-width:520px;position:relative}
+svg#cat{width:100%;height:100%;overflow:visible}
+#count{position:absolute;top:6px;right:16px;font-size:34px;font-weight:800;color:#5a3a22}
+#count small{font-size:13px;font-weight:500}
+#bar{display:flex;gap:10px;margin:8px 0 max(18px,env(safe-area-inset-bottom))}
+button{border:0;border-radius:22px;padding:12px 18px;font-size:15px;font-weight:700;background:#fff;color:#5a3a22;box-shadow:0 3px 0 #e0c4a2}
+button:active{transform:translateY(2px);box-shadow:0 1px 0 #e0c4a2}
+#mute{position:absolute;top:6px;left:16px;font-size:16px;padding:10px 14px}
+#mute.off{background:#5a3a22;color:#fff}
+.pop{position:absolute;pointer-events:none;font-weight:800;font-size:26px;color:#e0663a;animation:pop .8s ease-out forwards}
+@keyframes pop{to{transform:translateY(-90px) scale(1.3);opacity:0}}
+#msg{position:absolute;bottom:4px;width:100%;text-align:center;font-size:14px;color:#8a6446;pointer-events:none}
+#share{position:fixed;inset:0;background:#000a;display:none;flex-direction:column;align-items:center;justify-content:center;gap:12px;z-index:9}
+#share img{max-height:76vh;max-width:90vw;border-radius:14px}
+#share p{color:#fff;margin:0;font-size:13px}
+</style>
+</head>
+<body>
+<div id="app">
+  <h1>拍一下猫屁屁</h1><div id="sub">30 秒，班味清零</div>
+  <div id="stage">
+    <button id="mute">🔊</button>
+    <div id="count">0<small> 下</small></div>
+    <svg id="cat" viewBox="0 0 300 400"></svg>
+    <div id="msg">拍屁屁 · 摸摸头 · 摸摸脸</div>
+  </div>
+  <div id="bar"><button id="swap">换一只猫</button><button id="sharebtn">生成分享图</button></div>
+</div>
+<div id="share"><img id="shimg"><p>长按图片保存 · 点空白处关闭</p></div>
+<script>
+const CATS=[
+ {name:'橘团',mood:'慢吞吞的橘猫，永远不着急',bg:'#fde9d0',fur:'#f4a54a',dark:'#d9822b',belly:'#fff1dc',eye:'#3a2a1a',
+  lines:['又软又弹，班味掉了一半','橘团：嗯…再来一下','肩膀松下来了吧','老板是谁？不认识']},
+ {name:'煤球',mood:'傲娇黑猫，嘴上嫌弃身体很诚实',bg:'#dfe6f5',fur:'#3b3b4a',dark:'#262632',belly:'#52526a',eye:'#ffd23f',
+  lines:['煤球：…就一下哦','哼，不许拍太用力（再拍）','咕噜咕噜，不是我发出的','今日班味：已清零']}
+];
+let ci=0,taps=0,muted=false,start=0;
+const svg=document.getElementById('cat'),NS='http://www.w3.org/2000/svg';
+let G={};
+function build(){
+ const c=CATS[ci];
+ document.documentElement.style.setProperty('--bg',c.bg);
+ svg.innerHTML=`
+ <ellipse cx="150" cy="378" rx="105" ry="12" fill="#0002"/>
+ <g id="tail" style="transform-origin:215px 330px"><path d="M215 335 C275 330 285 270 262 220 C255 205 240 215 248 232 C265 265 255 300 215 312Z" fill="${c.fur}"/><path d="M262 220 C255 205 240 215 248 232 C253 240 262 232 262 220Z" fill="${c.dark}"/></g>
+ <g id="body" style="transform-origin:150px 375px">
+  <path id="torso" d="M70 370 C45 290 70 215 150 205 C230 215 255 290 230 370Z" fill="${c.fur}"/>
+  <path d="M95 300 C105 280 195 280 205 300" stroke="${c.dark}" stroke-width="5" fill="none" opacity=".4"/>
+  <ellipse cx="105" cy="365" rx="38" ry="16" fill="${c.dark}"/><ellipse cx="195" cy="365" rx="38" ry="16" fill="${c.dark}"/>
+  <g id="butt" style="transform-origin:150px 330px">
+   <ellipse cx="108" cy="318" rx="46" ry="48" fill="${c.fur}" stroke="${c.dark}" stroke-width="3"/>
+   <ellipse cx="192" cy="318" rx="46" ry="48" fill="${c.fur}" stroke="${c.dark}" stroke-width="3"/>
+   <path d="M150 282 L150 345" stroke="${c.dark}" stroke-width="3" opacity=".6"/>
+   <circle cx="150" cy="300" r="4" fill="${c.dark}"/>
+   <ellipse cx="100" cy="330" rx="22" ry="16" fill="${c.belly}" opacity=".35"/><ellipse cx="200" cy="330" rx="22" ry="16" fill="${c.belly}" opacity=".35"/>
+  </g>
+  <g id="head" style="transform-origin:150px 215px">
+   <path d="M88 130 L100 72 L135 100Z" fill="${c.fur}"/><path d="M212 130 L200 72 L165 100Z" fill="${c.fur}"/>
+   <path d="M100 118 L106 88 L124 104Z" fill="#f7b4b4"/><path d="M200 118 L194 88 L176 104Z" fill="#f7b4b4"/>
+   <ellipse cx="150" cy="150" rx="68" ry="58" fill="${c.fur}"/>
+   <ellipse cx="150" cy="170" rx="34" ry="24" fill="${c.belly}"/>
+   <g id="eyes"><ellipse class="eye" cx="122" cy="148" rx="9" ry="12" fill="${c.eye}"/><ellipse class="eye" cx="178" cy="148" rx="9" ry="12" fill="${c.eye}"/>
+    <circle cx="125" cy="143" r="3" fill="#fff"/><circle cx="181" cy="143" r="3" fill="#fff"/></g>
+   <path id="happy" d="M112 150 Q122 138 132 150 M168 150 Q178 138 188 150" stroke="${c.eye}" stroke-width="4" fill="none" stroke-linecap="round" opacity="0"/>
+   <path d="M144 164 L156 164 L150 172Z" fill="#e58a8a"/>
+   <path d="M150 172 Q142 182 134 176 M150 172 Q158 182 166 176" stroke="#5a3a22" stroke-width="2.5" fill="none" stroke-linecap="round"/>
+   <path d="M95 168 L60 162 M95 176 L62 182 M205 168 L240 162 M205 176 L238 182" stroke="#fff" stroke-width="2" opacity=".7"/>
+   <ellipse id="blush" cx="108" cy="170" rx="12" ry="7" fill="#ff8a8a" opacity="0"/><ellipse id="blush2" cx="192" cy="170" rx="12" ry="7" fill="#ff8a8a" opacity="0"/>
+  </g>
+ </g>
+ <rect id="hHead" x="85" y="70" width="130" height="75" fill="transparent"/>
+ <rect id="hFace" x="90" y="145" width="120" height="70" fill="transparent"/>
+ <rect id="hButt" x="55" y="270" width="190" height="100" rx="40" fill="transparent"/>`;
+ G={tail:q('tail'),body:q('body'),butt:q('butt'),head:q('head'),happy:q('happy'),eyes:q('eyes'),b1:q('blush'),b2:q('blush2')};
+ bind('hButt',slap);bind('hHead',()=>pet('head'));bind('hFace',()=>pet('face'));
+ document.getElementById('msg').textContent=c.name+'：'+c.mood;
+}
+const q=id=>svg.querySelector('#'+id);
+function bind(id,fn){q(id).addEventListener('pointerdown',e=>{e.preventDefault();ensureAudio();fn(e)})}
+
+// spring animation
+const S={sx:1,sy:1,vx:0,vy:0,tail:0,tv:0,hr:0,hv:0,hy:0,hyv:0,tailTarget:0,blush:0,happy:0};
+let last=performance.now();
+function loop(t){
+ const dt=Math.min(.033,(t-last)/1000);last=t;
+ const k=260,d=9;
+ S.vx+=(-(S.sx-1)*k-S.vx*d)*dt;S.sx+=S.vx*dt;
+ S.vy+=(-(S.sy-1)*k-S.vy*d)*dt;S.sy+=S.vy*dt;
+ S.tv+=(-(S.tail-S.tailTarget)*60-S.tv*5)*dt;S.tail+=S.tv*dt;
+ S.hv+=(-S.hr*150-S.hv*8)*dt;S.hr+=S.hv*dt;
+ S.hyv+=(-S.hy*180-S.hyv*10)*dt;S.hy+=S.hyv*dt;
+ S.tailTarget*=Math.pow(.2,dt);
+ S.blush*=Math.pow(.4,dt);S.happy*=Math.pow(.5,dt);
+ const idle=Math.sin(t/900)*1.5;
+ if(G.butt){
+  G.butt.style.transform=`scale(${S.sx},${S.sy})`;
+  G.tail.style.transform=`rotate(${S.tail+Math.sin(t/700)*6}deg)`;
+  G.head.style.transform=`translateY(${S.hy+idle}px) rotate(${S.hr}deg)`;
+  G.happy.setAttribute('opacity',Math.min(1,S.happy));G.eyes.setAttribute('opacity',1-Math.min(1,S.happy));
+  G.b1.setAttribute('opacity',Math.min(.8,S.blush));G.b2.setAttribute('opacity',Math.min(.8,S.blush));
+ }
+ requestAnimationFrame(loop);
+}
+requestAnimationFrame(loop);
+
+// audio
+let AC=null;
+function ensureAudio(){if(!AC){try{AC=new (window.AudioContext||window.webkitAudioContext)()}catch(e){}}if(AC&&AC.state==='suspended')AC.resume()}
+function thump(p=1){ if(muted||!AC)return;
+ const t=AC.currentTime,o=AC.createOscillator(),g=AC.createGain();
+ o.frequency.setValueAtTime(190*p,t);o.frequency.exponentialRampToValueAtTime(55,t+.14);
+ g.gain.setValueAtTime(.7,t);g.gain.exponentialRampToValueAtTime(.001,t+.2);
+ o.connect(g).connect(AC.destination);o.start(t);o.stop(t+.22);
+ // "meow-ish" squeak
+ const o2=AC.createOscillator(),g2=AC.createGain();
+ o2.type='triangle';o2.frequency.setValueAtTime(520*p,t+.02);o2.frequency.exponentialRampToValueAtTime(880*p,t+.12);o2.frequency.exponentialRampToValueAtTime(600*p,t+.22);
+ g2.gain.setValueAtTime(0,t);g2.gain.linearRampToValueAtTime(.12,t+.05);g2.gain.exponentialRampToValueAtTime(.001,t+.28);
+ o2.connect(g2).connect(AC.destination);o2.start(t);o2.stop(t+.3);}
+function purr(dur=.9){ if(muted||!AC)return;
+ const t=AC.currentTime,o=AC.createOscillator(),g=AC.createGain(),l=AC.createOscillator(),lg=AC.createGain();
+ o.type='sawtooth';o.frequency.value=48;l.frequency.value=24;lg.gain.value=.12;
+ g.gain.setValueAtTime(0,t);g.gain.linearRampToValueAtTime(.16,t+.15);g.gain.linearRampToValueAtTime(0,t+dur);
+ l.connect(lg).connect(g.gain);o.connect(g).connect(AC.destination);o.start(t);l.start(t);o.stop(t+dur);l.stop(t+dur);}
+const vib=ms=>{try{navigator.vibrate&&navigator.vibrate(ms)}catch(e){}};
+
+function floaty(e,txt){
+ const r=document.getElementById('stage').getBoundingClientRect();
+ const el=document.createElement('div');el.className='pop';el.textContent=txt;
+ el.style.left=(e.clientX-r.left-14)+'px';el.style.top=(e.clientY-r.top-20)+'px';
+ document.getElementById('stage').appendChild(el);setTimeout(()=>el.remove(),800);
+}
+let combo=0,lastTap=0;
+function slap(e){
+ if(!start)start=Date.now();
+ taps++;const now=Date.now();combo=now-lastTap<700?combo+1:1;lastTap=now;
+ const s=Math.min(1,.5+combo*.08);
+ S.vy=-5*s;S.vx=7*s;S.sy=.8;S.sx=1.12;       // squash then stretch
+ S.tailTarget=-38-Math.min(combo,6)*3;S.tv=-300;     // tail up
+ S.hy=-8;S.hyv=-90;S.hr=(Math.random()<.5?-1:1)*4;
+ S.blush=1;if(combo>=4)S.happy=1;
+ thump(.9+Math.random()*.25);vib(18);
+ if(combo>=6&&combo%3===0)purr(1);
+ floaty(e,['啪','啵','软！','Q弹'][Math.floor(Math.random()*4)]);
+ document.getElementById('count').firstChild.nodeValue=taps;
+ const L=CATS[ci].lines;if(taps%5===0)document.getElementById('msg').textContent=L[Math.floor(Math.random()*L.length)];
+}
+function pet(part){
+ S.hv=part==='head'?80:-60;S.hyv=40;S.happy=1.5;S.blush=1.2;purr(.7);vib(8);
+}
+document.getElementById('mute').onclick=e=>{muted=!muted;e.target.textContent=muted?'🔇':'🔊';e.target.classList.toggle('off',muted)};
+document.getElementById('swap').onclick=()=>{ci=(ci+1)%CATS.length;build()};
+document.getElementById('sharebtn').onclick=makeShare;
+
+function feeling(){
+ if(taps<10)return '今天只拍了一小下，班味还剩一点点';
+ if(taps<40)return '肩膀松了，今天可以体面下班';
+ if(taps<100)return '班味清零，灵魂已回到身体里';
+ return '今日解压成功，猫替你上了班';
+}
+function makeShare(){
+ const c=CATS[ci],W=750,H=1334,cv=document.createElement('canvas');cv.width=W;cv.height=H;
+ const x=cv.getContext('2d');
+ x.fillStyle=c.bg;x.fillRect(0,0,W,H);
+ x.fillStyle='#5a3a22';x.textAlign='center';
+ x.font='bold 44px -apple-system,PingFang SC,sans-serif';x.fillText('拍一下猫屁屁，30 秒班味清零',W/2,150);
+ // render svg to image
+ const s=new XMLSerializer().serializeToString(svg).replace('<svg','<svg width="600" height="800"');
+ const img=new Image();
+ img.onload=()=>{
+  x.drawImage(img,75,230,600,800);
+  x.fillStyle='#5a3a22';x.font='bold 64px -apple-system,PingFang SC,sans-serif';
+  x.fillText('今天拍了 '+taps+' 下',W/2,1110);
+  x.font='34px -apple-system,PingFang SC,sans-serif';x.fillStyle='#8a6446';
+  x.fillText(feeling(),W/2,1175);
+  x.font='26px -apple-system,PingFang SC,sans-serif';x.fillText('— '+c.name+' —',W/2,1250);
+  document.getElementById('shimg').src=cv.toDataURL('image/png');
+  document.getElementById('share').style.display='flex';
+ };
+ img.src='data:image/svg+xml;charset=utf-8,'+encodeURIComponent(s);
+}
+document.getElementById('share').onclick=e=>{if(e.target.tagName!=='IMG')e.currentTarget.style.display='none'};
+build();
+</script>
+</body>
+</html>
