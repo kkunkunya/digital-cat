@@ -1,0 +1,52 @@
+{
+  "issue": "DENE-2201",
+  "snapshot_commit": "476400bde60a37d695ecb7821ca44ff34e483689",
+  "included_prior_commit": "4ec9b1f86f683e2460f6e22786b20d8234f0c1b0",
+  "bundle_bytes": 307378636,
+  "bundle_sha256": "8c026b630f5ca5a00837b8989c9e656045820966da8fef75a27a916d03219e58",
+  "encrypted_sha256": "b0510231af56af7f1d1ebf9766ed16e4a6123754df40a3b0f562d04edae0a4a2",
+  "parts": [
+    {
+      "file": "snapshot.bundle.age.part001",
+      "bytes": 41943040,
+      "sha256": "cc67be0231f24a59cfee88d3a1c1f26947421ba93c4eb04ed9d28d148e08b9fb"
+    },
+    {
+      "file": "snapshot.bundle.age.part002",
+      "bytes": 41943040,
+      "sha256": "1febbd363dae7c4a051ead1e0a5a26d9ad6552d9c32bced6ae6471c4cf8e16f3"
+    },
+    {
+      "file": "snapshot.bundle.age.part003",
+      "bytes": 41943040,
+      "sha256": "f12e013030a1a6b57712a88a4800751b595a5e01eca9dc0b36cf9fc08cae37b8"
+    },
+    {
+      "file": "snapshot.bundle.age.part004",
+      "bytes": 41943040,
+      "sha256": "b8dfb41781f9c2346301a6036d9acfde4f81453c955d4d3c18a35562b2f5f70d"
+    },
+    {
+      "file": "snapshot.bundle.age.part005",
+      "bytes": 41943040,
+      "sha256": "2d5e69956f7b84d91bfe2da59cc1dc6867c7b579c5ce47990c13f92909044c64"
+    },
+    {
+      "file": "snapshot.bundle.age.part006",
+      "bytes": 41943040,
+      "sha256": "0614c49603f4a8206df997937fd433178d4d9a385249c46b5c8c6909034910b2"
+    },
+    {
+      "file": "snapshot.bundle.age.part007",
+      "bytes": 41943040,
+      "sha256": "a3f09e77c894a77fa60e51e800e408f1d9bb5d7b0d4d8af12460c80002768aae"
+    },
+    {
+      "file": "snapshot.bundle.age.part008",
+      "bytes": 13852596,
+      "sha256": "67fff4444d61633a19e6c7190f0b19735ee6050a6e35d1ed770ca33f971d5d3e"
+    }
+  ],
+  "format": "age X25519 encrypted full Git bundle; no original file paths or contents are public",
+  "round_trip_verified": true
+}
