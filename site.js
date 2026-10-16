@@ -39,7 +39,7 @@
 
   const tip = document.createElement('button');
   tip.className = 'btn cat-tip'; tip.hidden = true;
-  if (row) row.insertBefore(tip, row.lastElementChild);
+  if (row) row.after(tip); // its own line under Save / Close, at the very bottom of the card
 
   const nudge = document.createElement('button');
   nudge.id = 'tipnudge'; nudge.hidden = true; document.body.appendChild(nudge);

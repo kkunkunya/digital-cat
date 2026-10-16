@@ -10,9 +10,6 @@
 #sitefoot p a{text-decoration:underline;text-underline-offset:2px}
 #sitefoot i{font-style:normal;opacity:.6}
 #card.has-tip img{max-height:calc(100% - 196px)}
-#card.has-tip .row{flex-wrap:wrap;width:min(100%,340px)}
-#card.has-tip .row .btn{flex:1}
-#card.has-tip .row .btn.cat-tip{order:3;flex:0 0 auto;margin:0 auto}
 #card .cat-tip[hidden]{display:none}
 /* A small, quiet entry at the bottom of the share card — not a call to action. */
 #card .btn.cat-tip{padding:7px 14px;font-size:12px;color:#fff;background:linear-gradient(100deg,#ff7a3d,#ff4f7b);box-shadow:0 4px 12px #ff4f7b44}
