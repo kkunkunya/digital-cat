@@ -11,14 +11,4 @@
   };
   set(pick);
   document.querySelectorAll('.lang button').forEach((b) => b.addEventListener('click', () => { set(b.dataset.l); try { localStorage.setItem('lang', b.dataset.l); } catch (e) { /* private mode */ } }));
-  // Tip buttons: same live gate as the toy's menu (site.js).
-  const box = document.querySelector('[data-tip]');
-  if (box) {
-    let test = false; try { test = q.get('tip') === 'test' || sessionStorage.getItem('tip') === 'test'; if (test) sessionStorage.setItem('tip', 'test'); } catch (e) { /* private mode */ }
-    box.classList.toggle('tip-off', !test);
-    if (!test) fetch('/api/tip/status').then((r) => (r.ok ? r.json() : null)).then((s) => box.classList.toggle('tip-off', !(s && s.live))).catch(() => {});
-    box.querySelectorAll('[data-tier]').forEach((b) => b.addEventListener('click', () => {
-      location.href = `/api/tip?tier=${b.dataset.tier}&lang=${document.documentElement.lang}${test ? '&mode=test' : ''}`;
-    }));
-  }
 })();

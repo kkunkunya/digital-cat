@@ -42,9 +42,14 @@ a{color:var(--y)}
 .btn svg{width:18px;height:18px;fill:currentColor}
 .btn.hot{color:#fff;background:linear-gradient(100deg,var(--o),var(--p))}
 .btn:active{transform:scale(.96)}
-.soon{display:none;margin-top:12px;font-size:14px;color:var(--y)}
-.tip-off .tipbtns{display:none}.tip-off .soon{display:block}
-.doc{padding:8px 0 20px}
+.faq details{border-top:1px solid #ffffff14;padding:12px 0}
+.faq details:first-of-type{margin-top:6px}
+.faq summary{cursor:pointer;font-weight:800;font-size:15px;list-style:none;display:flex;justify-content:space-between;gap:12px}
+.faq summary::-webkit-details-marker{display:none}
+.faq summary::after{content:"+";color:var(--o);font-weight:900}
+.faq details[open] summary::after{content:"−"}
+.faq details p{margin-top:8px}
+.doc{padding-top:8px;padding-bottom:20px}
 .doc h1{font-size:40px;margin:16px 0 4px;letter-spacing:-1px}
 .doc .date{color:var(--dim);font-size:13px;margin:0 0 20px}
 .doc h2{font-size:18px;margin:26px 0 6px}
