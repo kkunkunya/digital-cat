@@ -1,0 +1,41 @@
+<!doctype html>
+<html lang="zh">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#170a04">
+<meta name="robots" content="noindex">
+<title>谢谢你 · Thank you · 数字猫猫</title>
+<meta name="title-zh" content="谢谢你请猫猫吃饭 · 数字猫猫">
+<meta name="title-en" content="Thank you · Digital Cat">
+<link rel="icon" href="favicon.svg" type="image/svg+xml"><link rel="icon" href="favicon-32.png" sizes="32x32"><link rel="apple-touch-icon" href="icon-180.png">
+<link rel="stylesheet" href="page.css">
+<style>
+.ty{min-height:70vh;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:30px 0}
+.ty .big{font-size:96px;line-height:1;animation:nom 1.2s ease-in-out infinite}
+@keyframes nom{50%{transform:scale(1.12) rotate(-6deg)}}
+.ty h1{font-size:clamp(36px,10vw,60px);margin:18px 0 8px;letter-spacing:-1px}
+.ty p{color:var(--dim);font-size:17px;line-height:1.6;max-width:26em;margin:0 auto}
+.conf{position:fixed;inset:0;pointer-events:none;overflow:hidden}
+.conf i{position:absolute;top:-10%;font-style:normal;font-size:22px;animation:fall linear forwards}
+@keyframes fall{to{transform:translateY(120vh) rotate(540deg)}}
+</style>
+</head>
+<body>
+<header class="nav"><a class="home" href="/" data-keep-lang><img src="icon-180.png" alt=""><span lang="zh">数字猫猫</span><span lang="en">Digital Cat</span></a>
+  <div class="lang" role="group" aria-label="Language"><button data-l="zh">中文</button><button data-l="en">English</button></div></header>
+<main class="wrap ty">
+  <div class="big">😻</div>
+  <h1 class="grad"><span lang="zh">吧唧吧唧，谢谢你！</span><span lang="en">Nom nom — thank you!</span></h1>
+  <p lang="zh">猫猫吃饱了，正在呼噜。收据会发到你的邮箱。</p>
+  <p lang="en">The cat is full and purring. Your receipt is on its way to your inbox.</p>
+  <a class="cta" href="/" data-keep-lang><span lang="zh">回去再拍两下 →</span><span lang="en">Back for more pats →</span></a>
+</main>
+<div class="conf" aria-hidden="true"></div>
+<script src="page.js"></script>
+<script>
+(() => { const c = document.querySelector('.conf'); const s = ['🐾', '🐟', '🥫', '✨', '🧡'];
+  for (let i = 0; i < 26; i++) { const n = document.createElement('i'); n.textContent = s[i % s.length]; n.style.left = Math.random() * 100 + '%'; n.style.animationDuration = 2.5 + Math.random() * 2.5 + 's'; n.style.animationDelay = Math.random() * 1.2 + 's'; c.appendChild(n); } })();
+</script>
+</body>
+</html>

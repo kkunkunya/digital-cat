@@ -1,0 +1,5 @@
+{
+  "private": true,
+  "description": "Tip checkout for cat.kunkunzheten.top (Waffo Pancake, own Digital Cat store).",
+  "dependencies": { "@waffo/pancake-ts": "0.25.0" }
+}

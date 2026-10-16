@@ -4,8 +4,25 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no,viewport-fit=cover">
 <meta name="theme-color" content="#fff3e3">
-<title>拍一下猫屁屁 · 30 秒班味清零</title>
-<link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🐱</text></svg>">
+<title>拍一下猫屁屁 · 30 秒放松一下</title>
+<meta name="description" content="拍一下猫屁屁，30 秒放松一下。Pat the cat and unwind in 30 seconds.">
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+<link rel="icon" href="favicon-32.png" sizes="32x32" type="image/png">
+<link rel="apple-touch-icon" href="icon-180.png">
+<link rel="manifest" href="site.webmanifest">
+<link rel="canonical" href="https://cat.kunkunzheten.top/">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="数字猫猫 Digital Cat">
+<meta property="og:url" content="https://cat.kunkunzheten.top/">
+<meta property="og:title" content="拍一下猫屁屁 · 30 秒放松一下 | Pat the cat">
+<meta property="og:description" content="手机上拍拍一只毛茸茸的 3D 猫，真猫叫声，30 秒放松。Pat a fluffy 3D cat with real purrs and meows. Unwind in 30 seconds.">
+<meta property="og:image" content="https://cat.kunkunzheten.top/og.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="一只毛茸茸的橘猫背影 · A fluffy orange cat from behind">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://cat.kunkunzheten.top/og.png">
+<link rel="stylesheet" href="site.css">
 <style>
 :root{--bg1:#fff3e3;--bg2:#ffc890;--ink:#7a3f10}
 *{box-sizing:border-box;-webkit-tap-highlight-color:transparent;user-select:none;-webkit-user-select:none;-webkit-touch-callout:none}
@@ -23,8 +40,10 @@ html,body{margin:0;height:100%;overflow:hidden;background:linear-gradient(var(--
 #snd{display:flex;flex-direction:column;align-items:flex-start;gap:6px}
 #ear{font-size:12px;font-weight:700;opacity:.75;padding-left:6px;transition:opacity .5s}
 #ear.gone{opacity:0}
-#lang{border:0;border-radius:999px;padding:6px 11px;font:800 12px/1 inherit;color:var(--ink);background:#fff9;box-shadow:inset 0 -2px 0 #0000000d}
-#cred{position:absolute;right:8px;bottom:8px;font-size:9px;line-height:1.2;text-align:center;color:inherit;opacity:.35;text-decoration:none}
+#lang{display:flex;padding:3px;border-radius:999px;background:#fff9;box-shadow:inset 0 -2px 0 #0000000d}
+#lang button{border:0;border-radius:999px;padding:7px 12px;font:700 13px/1 inherit;color:var(--ink);background:none;opacity:.6}
+#lang button.on{background:var(--ink);color:#fff;opacity:1}
+#cred{position:absolute;right:8px;bottom:8px;max-width:40px;font-size:9px;line-height:1.2;text-align:center;color:inherit;opacity:.35;text-decoration:none}
 #done{position:absolute;left:50%;bottom:44px;transform:translate(-50%,20px);opacity:0;pointer-events:none;transition:opacity .35s,transform .35s;white-space:nowrap;box-shadow:0 8px 24px #0003}
 #done.on{opacity:1;transform:translate(-50%,0);pointer-events:auto}
 .btn.glow{animation:glow 1.2s ease-in-out 4}
@@ -35,6 +54,7 @@ html,body{margin:0;height:100%;overflow:hidden;background:linear-gradient(var(--
 #num.bump{animation:bump .28s cubic-bezier(.3,1.8,.5,1)}
 @keyframes bump{0%{transform:scale(1.35)}100%{transform:scale(1)}}
 #score small{font-size:16px;font-weight:700;margin-left:2px}
+#score small[data-t=pre]{margin:0 4px 0 0}
 #combo{margin-top:4px;font-size:15px;font-weight:800;color:#fff;background:#ff6a3d;border-radius:999px;padding:4px 10px;display:inline-block;opacity:0;transform:scale(.6);transition:opacity .25s,transform .25s}
 #combo.on{opacity:1;transform:scale(1)}
 #combo.bump{animation:bump .25s ease-out}
@@ -75,22 +95,23 @@ html,body{margin:0;height:100%;overflow:hidden;background:linear-gradient(var(--
     <canvas id="gl"></canvas>
     <div id="fx"></div>
     <div id="top">
-      <div id="snd"><button id="mute" class="off nudge" aria-label="声音开关"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M4 9v6h4l5 4V5L8 9H4z"/><path class="w" d="M16 8.5a5 5 0 0 1 0 7" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round"/><path class="x" d="M16 9l5 6M21 9l-5 6" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg><span>开呼噜声</span></button><div id="ear" data-t="ear">🎧 戴耳机更像真猫</div><button id="lang">EN</button></div>
-      <div id="score"><span id="num">0</span><small data-t="unit">下</small><br><span id="combo"></span></div>
+      <div id="snd"><div id="lang" role="group" aria-label="Language"><button data-l="zh" lang="zh">中文</button><button data-l="en" lang="en">English</button></div><button id="mute" aria-label="声音"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M4 9v6h4l5 4V5L8 9H4z"/><path class="w" d="M16 8.5a5 5 0 0 1 0 7" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round"/><path class="x" d="M16 9l5 6M21 9l-5 6" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg><span>关闭声音</span></button><div id="ear" data-t="ear">建议佩戴耳机</div></div>
+      <div id="score"><small data-t="pre">已拍</small><span id="num">0</span><small id="unit" data-t="unit">下</small><br><span id="combo"></span></div>
     </div>
-    <div id="hint" data-t="hint">👋 拍拍屁屁<small>左右拖动 · 转着看</small></div>
+    <div id="hint" data-t="hint">点击轻拍<small>左右拖动可转动视角</small></div>
     <div id="line"></div>
-    <button id="done" class="btn" data-t="done">班味已清零 ✓ 晒一张</button>
-    <a id="cred" href="audio/CREDITS.txt" target="_blank" rel="noopener" data-t="cred">声音<br>素材</a>
+    <button id="done" class="btn" data-t="done">放松完成，分享战绩</button>
+    <a id="cred" href="audio/CREDITS.txt" target="_blank" rel="noopener" data-t="cred">音效来源</a>
   </div>
   <div id="bar">
-    <button class="chip on">橘团<small>慢吞吞</small></button>
+    <button class="chip on">橘子<small>温顺</small></button>
     <button class="chip">煤球<small>傲娇</small></button>
-    <button class="btn" id="sharebtn" data-t="share">晒今日战绩</button>
+    <button class="btn" id="sharebtn" data-t="share">分享战绩</button>
   </div>
 </div>
-<div id="card"><img id="cardimg" alt="分享图"><div class="tip" data-t="tip">长按图片保存，或发给朋友</div><div class="row"><button class="btn" id="savebtn" data-t="save">保存图片</button><button class="btn" id="closebtn" data-t="close">关闭</button></div></div>
+<div id="card"><img id="cardimg" alt="分享图"><div class="tip" data-t="tip">长按图片即可保存或发送给朋友。</div><div class="row"><button class="btn" id="savebtn" data-t="save">保存图片</button><button class="btn" id="closebtn" data-t="close">关闭</button></div></div>
 <pre id="dbg" hidden></pre>
-<script type="module" src="dist/app.js?v=4d354a60"></script>
+<script src="site.js" defer></script>
+<script type="module" src="dist/app.js?v=60db97b5"></script>
 </body>
 </html>

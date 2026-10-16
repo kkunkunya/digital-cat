@@ -1,0 +1,19 @@
+// Cloudflare Worker that serves the static site. Only cat.kunkunzheten.top is public:
+// the *.workers.dev address and preview URLs are switched off. The domain is bound once in Cloudflare
+// (Workers → digital-cat → Domains); the deploy token can't manage zone routes, so it is not listed here.
+// worker/index.js only answers /api/* (tip checkout); every other path is a static file from _deploy.
+{
+  "name": "digital-cat",
+  "main": "worker/index.js",
+  "compatibility_date": "2026-10-01",
+  "compatibility_flags": ["nodejs_compat"],
+  "assets": { "directory": "./_deploy", "binding": "ASSETS", "run_worker_first": ["/api/*"] },
+  "vars": {
+    // Waffo store "Digital Cat" STO_0ELaxh4E3ix66V6hPuKLKl; product published to test + prod (same id).
+    "WAFFO_PRODUCT_TIP": "PROD_4C5pAuqWJEgq7E2qkuSxyY",
+    // "1" only after Waffo approves the store for production payments; until then the tip stays hidden.
+    "TIP_LIVE": "0"
+  },
+  "workers_dev": false,
+  "preview_urls": false
+}
