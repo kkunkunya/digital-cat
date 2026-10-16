@@ -1154,7 +1154,8 @@ function onUp(e) {
 }
 canvas.addEventListener('pointerdown', onDown, { passive: false });
 canvas.addEventListener('pointermove', onMove);
-canvas.addEventListener('wheel', (e) => { e.preventDefault(); orbit.zoom = clamp(orbit.zoom * Math.exp(e.deltaY * 0.0015), 0.68, 1.2); orbit.lastDrag = T; }, { passive: false });
+// Plain wheel/trackpad scroll goes to the page (details below the cat); only a pinch (ctrl+wheel) zooms.
+canvas.addEventListener('wheel', (e) => { if (!e.ctrlKey) return; e.preventDefault(); orbit.zoom = clamp(orbit.zoom * Math.exp(e.deltaY * 0.0015), 0.68, 1.2); orbit.lastDrag = T; }, { passive: false });
 canvas.addEventListener('pointerup', onUp);
 canvas.addEventListener('pointercancel', (e) => {
   stats.cancel++; touches.delete(e.pointerId); dragging = [...touches.values()].some((o) => o.drag);

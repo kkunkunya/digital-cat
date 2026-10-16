@@ -85,6 +85,41 @@
 
   if (card) new MutationObserver(() => { if (card.classList.contains('on') && !played) { played = true; paint(); } }).observe(card, { attributes: true, attributeFilter: ['class'] });
 
+  // Reward wall: lifetime pats (kept on this device only) unlock badges below the cat. Nothing is ever locked
+  // behind it; once you've earned a badge it says thanks and offers the same optional tip.
+  const BADGES = [[10, '🐾'], [50, '😽'], [100, '🍊'], [300, '🐟'], [1000, '👑']];
+  const WALL = {
+    zh: { h: '🏆 奖励墙', sub: (n) => `你一共拍了 ${n} 下`, next: (k) => `再拍 ${k} 下解锁下一枚徽章`, all: '全部解锁，你是猫猫认证铲屎官！',
+      names: ['初次见面', '猫猫信任你了', '橘子的好朋友', '小鱼干供应商', '猫猫国王'], got: (b) => `解锁徽章：${b}`, thanks: '谢谢你常来陪它们，想投喂可以点这里 →' },
+    en: { h: '🏆 Reward wall', sub: (n) => `${n} pats so far`, next: (k) => `${k} more pats to the next badge`, all: 'All unlocked — certified cat servant!',
+      names: ['First hello', 'The cat trusts you', "Tangerine's friend", 'Treat supplier', 'Cat royalty'], got: (b) => `Badge unlocked: ${b}`, thanks: 'Thanks for visiting so often — feed them if you like →' },
+  };
+  let total = 0; try { total = parseInt(localStorage.getItem('pats') || '0', 10) || 0; } catch (e) { /* private mode */ }
+  const wall = document.createElement('section'); wall.id = 'wall';
+  foot.before(wall);
+  const toast = document.createElement('div'); toast.id = 'badgetoast'; toast.hidden = true; document.body.appendChild(toast);
+  function paintWall() {
+    const w = WALL[lang()], nx = BADGES.find(([n]) => total < n);
+    wall.innerHTML = `<h2>${w.h}</h2><p>${w.sub(total)} · ${nx ? w.next(nx[0] - total) : w.all}</p><ul>${BADGES.map(([n, e], i) =>
+      `<li class="${total >= n ? 'on' : ''}"><b>${total >= n ? e : '🔒'}</b><span>${w.names[i]}</span><small>${n}</small></li>`).join('')}</ul>`;
+    if (tipOpen && total >= BADGES[0][0]) {
+      const a = wall.appendChild(document.createElement('button')); a.className = 'walltip'; a.textContent = w.thanks; a.addEventListener('click', go);
+    }
+  }
+  let last = 0;
+  if (num) new MutationObserver(() => {
+    const n = parseInt(num.textContent, 10) || 0;
+    if (n > last) {
+      const before = total; total += n - last;
+      try { localStorage.setItem('pats', String(total)); } catch (e) { /* private mode */ }
+      const hit = BADGES.findIndex(([b]) => before < b && total >= b);
+      if (hit >= 0) { toast.textContent = BADGES[hit][1] + ' ' + WALL[lang()].got(WALL[lang()].names[hit]); toast.hidden = false; setTimeout(() => { toast.hidden = true; }, 2600); }
+      paintWall();
+    }
+    last = n;
+  }).observe(num, { childList: true, characterData: true, subtree: true });
+  const paint0 = paint; paint = () => { paint0(); paintWall(); };
+
   new MutationObserver(paint).observe(document.documentElement, { attributes: true, attributeFilter: ['lang'] });
   paint();
 })();
