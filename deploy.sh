@@ -21,7 +21,7 @@ sed -i '' -E "s#dist/app\.js(\?v=[0-9a-f]+)?\"#dist/app.js?v=$(md5 -q dist/app.j
 rm -rf _deploy && mkdir -p _deploy/dist
 cp index.html _deploy/ && cp dist/app.js _deploy/dist/ && cp -R audio _deploy/audio
 cp about.html privacy.html terms.html thanks.html site.js site.css page.js page.css site.webmanifest \
-   favicon.svg favicon-32.png icon-180.png icon-512.png og.png about-cat.jpg _deploy/
+   favicon.svg favicon-32.png icon-180.png icon-512.png og.png about-cat.jpg robots.txt sitemap.xml _deploy/
 [ -d worker/node_modules ] || npm ci --prefix worker --silent || npm install --prefix worker --silent
 
 # 3. 发布

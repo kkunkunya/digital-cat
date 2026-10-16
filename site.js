@@ -4,18 +4,21 @@
 (() => {
   const GH = 'https://github.com/kkunkunya/digital-cat';
   const MAIL = 'hello@deararcana.com';
+  const TAROT = 'https://deararcana.com/'; // our sister site; zh visitors get its Traditional Chinese edition
   const COPY = {
     // Copy from the social-media manager's 1016 sheet. Sound lines say "real cats" / "pats & meows" because
     // the purr is a public-domain recording, not Kun's cat (audio/CREDITS.txt).
     zh: {
       intro: '拍拍它的屁屁，它会哼哼给你听。', by: '声音都来自真猫。坤坤做的小玩具。', faq: '常见问题',
       gh: '开源代码', mail: `联系：${MAIL}`, privacy: '不收集个人信息，只在你手机里记战绩', terms: '条款', cred: '拍打声和喵声录自坤坤家的猫',
-      tip: '请猫猫吃根小鱼干 🐟', tipNote: '喜欢就投喂，不投也能一直玩', tipAria: '打赏 2.99 美元，请猫猫吃根小鱼干',
+      tarot: '我们还做了免费塔罗占卜站 Dear Arcana →',
+      tip: '给 Tangerine 和 Coal 买个罐罐 🐟', tipNote: '喜欢就投喂，不投也能一直玩', tipAria: '打赏 2.99 美元，给 Tangerine 和 Coal 买个罐罐',
     },
     en: {
       intro: 'Pat its butt. It purrs back.', by: 'Real sounds from real cats. A tiny toy by Kunkun.', faq: 'FAQ',
       gh: 'Open source', mail: `Contact: ${MAIL}`, privacy: 'No personal data — scores stay on your device', terms: 'Terms', cred: "Pats & meows recorded from Kunkun's own cat",
-      tip: 'Treat the cats to a fish snack 🐟', tipNote: "Totally optional — it's free forever", tipAria: 'Tip US$2.99 to treat the cats to a fish snack',
+      tarot: 'Also by us: Dear Arcana, free online tarot →',
+      tip: 'Buy Tangerine and Coal a can of treats 🐟', tipNote: "Totally optional — it's free forever", tipAria: 'Tip US$2.99 to buy Tangerine and Coal a can of treats',
     },
   };
   const lang = () => (document.documentElement.lang === 'zh' ? 'zh' : 'en');
@@ -31,11 +34,12 @@
   const row = card && card.querySelector('.row');
   if (!app) return;
 
-  const foot = document.createElement('footer');
-  foot.id = 'sitefoot';
-  foot.innerHTML = `<p><span data-k="intro"></span> <a href="about.html#faq" data-page data-k="faq"></a></p><small data-k="by"></small>
-    <nav><a href="${GH}" target="_blank" rel="noopener" data-k="gh"></a><i>·</i><a href="mailto:${MAIL}" data-k="mail"></a><i>·</i><a href="privacy.html" data-page data-k="privacy"></a><i>·</i><a href="terms.html" data-page data-k="terms"></a><i>·</i><a href="audio/CREDITS.txt" target="_blank" rel="noopener" data-k="cred"></a></nav>`;
-  app.appendChild(foot);
+  // index.html ships the footer with a static bilingual description (for search engines); add the rest around it.
+  let foot = document.getElementById('sitefoot');
+  if (!foot) { foot = app.appendChild(document.createElement('footer')); foot.id = 'sitefoot'; }
+  foot.insertAdjacentHTML('afterbegin', '<p><span data-k="intro"></span> <a href="about.html#faq" data-page data-k="faq"></a></p><small data-k="by"></small>');
+  foot.insertAdjacentHTML('beforeend', `<nav><a href="${GH}" target="_blank" rel="noopener" data-k="gh"></a><i>·</i><a href="mailto:${MAIL}" data-k="mail"></a><i>·</i><a href="privacy.html" data-page data-k="privacy"></a><i>·</i><a href="terms.html" data-page data-k="terms"></a><i>·</i><a href="audio/CREDITS.txt" target="_blank" rel="noopener" data-k="cred"></a></nav>
+    <a class="sib" href="${TAROT}" target="_blank" rel="noopener" data-k="tarot"></a>`);
 
   const tip = document.createElement('button');
   tip.className = 'btn cat-tip'; tip.hidden = true;
@@ -50,6 +54,7 @@
     foot.querySelectorAll('[data-k]').forEach((n) => { n.textContent = t[n.dataset.k]; });
     // Keep the static pages in the visitor's language.
     foot.querySelectorAll('a[data-page]').forEach((a) => { const [p, h] = a.getAttribute('href').split('#'); a.href = p.split('?')[0] + '?lang=' + lang() + (h ? '#' + h : ''); });
+    foot.querySelector('.sib').href = TAROT + (lang() === 'zh' ? 'zh-hant' : '');
     tip.textContent = t.tip; tip.appendChild(document.createElement('small')).textContent = t.tipNote; tip.setAttribute('aria-label', t.tipAria);
     nudge.textContent = t.tip; nudge.setAttribute('aria-label', t.tipAria);
     tip.hidden = !(tipOpen && played);
@@ -59,12 +64,17 @@
   function go() { location.href = `/api/tip?tier=can&lang=${lang()}${testMode ? '&mode=test' : ''}`; }
   tip.addEventListener('click', () => { tip.classList.add('go'); go(); });
 
-  // Quiet corner hint at 20 pats, once per visit, gone after 5 s; never over the cat. Counted from #num, so the game code is untouched.
-  const num = document.getElementById('num');
-  if (num) new MutationObserver(() => {
-    if (nudged || !tipOpen || (parseInt(num.textContent, 10) || 0) < 20) return;
+  // Quiet corner hint at 20 pats or the cat's first butt-raise (main.js sets body[data-butt-up]), once per visit,
+  // gone after 5 s; never over the cat.
+  function maybeNudge() {
+    if (nudged || !tipOpen) return;
     nudged = true; paint(); nudge.hidden = false; setTimeout(() => { nudge.hidden = true; }, 5000);
-  }).observe(num, { childList: true, characterData: true, subtree: true });
+  }
+  const num = document.getElementById('num');
+  if (num) new MutationObserver(() => { if ((parseInt(num.textContent, 10) || 0) >= 20) maybeNudge(); })
+    .observe(num, { childList: true, characterData: true, subtree: true });
+  new MutationObserver(() => { if (document.body.dataset.buttUp) maybeNudge(); })
+    .observe(document.body, { attributes: true, attributeFilter: ['data-butt-up'] });
 
   // The tip shows only once the live checkout is approved (or in an explicit ?tip=test preview).
   if (!testMode) fetch('/api/tip/status').then((r) => (r.ok ? r.json() : null)).then((s) => { tipOpen = !!(s && s.live); paint(); }).catch(() => {});
