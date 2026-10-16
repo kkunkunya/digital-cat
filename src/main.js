@@ -41,9 +41,9 @@ const CATS = [
 // ───────────────────────── words (one entry per language; adding a language = adding one entry) ─────────────────────────
 const COPY = {
   zh: {
-    title: '拍一下猫屁屁 · 30 秒放松一下',
+    title: '数字猫猫 · 拍拍屁屁就哼哼',
     ui: { ear: '建议佩戴耳机', hint: '点击轻拍<small>左右拖动可转动视角</small>', pre: '已拍', unit: '下', done: '放松完成，分享战绩', cred: '音效来源',
-      share: '分享战绩', tip: '长按图片即可保存或发送给朋友。', save: '保存图片', close: '关闭' },
+      share: '晒给朋友', tip: '长按图片即可保存或发送给朋友。', save: '保存图片', close: '关闭' },
     sound: '声音', soundOn: '开启声音', soundOff: '关闭声音', saved: '已保存', cardAlt: '分享图', combo: '连拍 ×', wrap: '30 秒到了，好好放松一下。',
     pop: { soft: ['啪', '轻拍', '软'], mid: ['好软', '弹', '啪', '舒服'], big: ['呼噜', '好舒服', '再来', '真舒服'], face: ['蹭蹭', '呼噜', '❤'], pet: ['摸摸', '呼噜', '舒服'] },
     feel: ['还没开始，猫咪在等你。', '拍了一下，压力开始松动。', '拍了几下，心情轻松了一些。', '肩膀放松了，今天可以从容下班。', '压力清零，整个人都回来了。', '今天的辛苦，猫咪替你分担了。'],
@@ -66,9 +66,9 @@ const COPY = {
     },
   },
   en: {
-    title: 'Pat the Cat · Unwind in 30 Seconds',
+    title: 'Digital Cats · Pat it, it purrs',
     ui: { ear: 'Best with headphones', hint: 'Tap to pat<small>Drag sideways to turn the view.</small>', pre: '', unit: 'pats', done: 'All done. Share your score.', cred: 'Audio credits',
-      share: 'Share my score', tip: 'Press and hold the image to save or share it.', save: 'Save image', close: 'Close' },
+      share: 'Share with a friend', tip: 'Press and hold the image to save or share it.', save: 'Save image', close: 'Close' },
     sound: 'Sound', soundOn: 'Sound on', soundOff: 'Sound off', saved: 'Saved', cardAlt: 'Score card', combo: 'Combo ×', wrap: 'Thirty seconds. Feeling lighter already.',
     pop: { soft: ['Pat.', 'Boop.', 'Soft.'], mid: ['So soft.', 'Bouncy.', 'Pat.', 'Nice.'], big: ['Purr.', 'So good.', 'Again.', 'Bliss.'], face: ['Nuzzle.', 'Purr.', '❤'], pet: ['Pet.', 'Purr.', 'Cozy.'] },
     feel: ['No pats yet. The cat is waiting.', 'One pat. The stress is starting to ease.', 'A few pats. Already feeling lighter.', 'Shoulders down. You can leave work on time today.', 'Stress cleared. You feel like yourself again.', 'The cat took on the day’s stress for you.'],
