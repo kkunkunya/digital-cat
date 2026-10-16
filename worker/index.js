@@ -33,6 +33,7 @@ async function tip(url, env) {
       currency: "USD",
       priceSnapshot: { amount: TIERS[tier], taxCategory: TaxCategory.DigitalGoods },
       successUrl: `${url.origin}/thanks.html?lang=${lang}`,
+      language: lang === "en" ? "en" : "zh-Hans",
       metadata: { site: "digital-cat", tier, lang },
     });
     return Response.redirect(session.checkoutUrl, 303);
