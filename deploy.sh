@@ -1,6 +1,6 @@
 #!/bin/sh
 # 一键上线数字猫猫到 https://cat.kunkunzheten.top（Cloudflare Worker，09ol 账号）。不用浏览器登录。
-# 用法（任意目录都行）：sh /Volumes/Storge/digital-cat/deploy.sh
+# 用法（任意目录都行）：sh <仓库目录>/deploy.sh
 # 令牌只从 Mac 钥匙串读，不落盘、不进命令行参数；服务名可用 CF_TOKEN_SERVICE 覆盖。
 # 网址、关掉 workers.dev 等设置都在 wrangler.jsonc。
 # 打赏收款（/api/tip，worker/index.js）要三把 Worker secret，只需设一次、部署不会覆盖：
@@ -20,7 +20,7 @@ sed -i '' -E "s#dist/app\.js(\?v=[0-9a-f]+)?\"#dist/app.js?v=$(md5 -q dist/app.j
 # 2. 只放页面真正加载的文件（备份 / 测试页不上公网）
 rm -rf _deploy && mkdir -p _deploy/dist
 cp index.html _deploy/ && cp dist/app.js _deploy/dist/ && cp -R audio _deploy/audio
-cp about.html privacy.html thanks.html site.js site.css page.js page.css site.webmanifest \
+cp about.html privacy.html terms.html thanks.html site.js site.css page.js page.css site.webmanifest \
    favicon.svg favicon-32.png icon-180.png icon-512.png og.png about-cat.jpg _deploy/
 [ -d worker/node_modules ] || npm ci --prefix worker --silent || npm install --prefix worker --silent
 
