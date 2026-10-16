@@ -16,6 +16,7 @@ security find-generic-password -s "$SERVICE" >/dev/null 2>&1 || { echo "钥匙�
 # 1. 打包（带缓存戳）
 npx --yes esbuild@0.25.10 src/main.js --bundle --minify --format=esm --target=es2020,safari15 --outfile=dist/app.js --log-level=warning
 sed -i '' -E "s#dist/app\.js(\?v=[0-9a-f]+)?\"#dist/app.js?v=$(md5 -q dist/app.js | cut -c1-8)\"#" index.html
+for f in site.css site.js; do sed -i '' -E "s#\"$f(\?v=[0-9a-f]+)?\"#\"$f?v=$(md5 -q $f | cut -c1-8)\"#" index.html; done
 
 # 2. 只放页面真正加载的文件（备份 / 测试页不上公网）
 rm -rf _deploy && mkdir -p _deploy/dist
