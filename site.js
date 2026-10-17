@@ -12,13 +12,13 @@
       intro: '拍拍它的屁屁，它会哼哼给你听。', by: '声音都来自真猫。坤坤做的小玩具。', faq: '怎么玩 · 声音来源 · 费用 · 常见问题',
       gh: '开源代码', mail: `联系：${MAIL}`, privacy: '不收集个人信息，只在你手机里记战绩', terms: '条款', cred: '拍打声和喵声录自坤坤家的猫',
       tarot: '我们还做了免费塔罗占卜站 Dear Arcana →',
-      tip: '给 Tangerine 和 Coal 买个罐罐 🐟', tipNote: '喜欢就投喂，不投也能一直玩', tipAria: '打赏 2.99 美元，给 Tangerine 和 Coal 买个罐罐',
+      tip: '给 Tangerine 和 Coal 买个罐罐 🐟', tipNote: '喜欢就投喂，不投也能一直玩', tipClose: '关闭', tipAria: '打赏 2.99 美元，给 Tangerine 和 Coal 买个罐罐',
     },
     en: {
       intro: 'Pat its butt. It purrs back.', by: 'Real sounds from real cats. A tiny toy by Kunkun.', faq: 'How to play · Sound sources · Pricing · FAQ',
       gh: 'Open source', mail: `Contact: ${MAIL}`, privacy: 'No personal data — scores stay on your device', terms: 'Terms', cred: "Pats & meows recorded from Kunkun's own cat",
       tarot: 'Also by us: Dear Arcana, free online tarot →',
-      tip: 'Buy Tangerine and Coal a can of treats 🐟', tipNote: "Totally optional — it's free forever", tipAria: 'Tip US$2.99 to buy Tangerine and Coal a can of treats',
+      tip: 'Buy Tangerine and Coal a can of treats 🐟', tipNote: "Totally optional — it's free forever", tipClose: 'Close', tipAria: 'Tip US$2.99 to buy Tangerine and Coal a can of treats',
     },
   };
   const lang = () => (document.documentElement.lang === 'zh' ? 'zh' : 'en');
@@ -47,7 +47,10 @@
 
   const nudge = document.createElement('button');
   nudge.id = 'tipnudge'; nudge.hidden = true; document.body.appendChild(nudge);
-  nudge.addEventListener('click', () => { nudge.hidden = true; go(); });
+  const nudgeGo = nudge.appendChild(document.createElement('button')); nudgeGo.className = 'tn-go';
+  const nudgeX = nudge.appendChild(document.createElement('button')); nudgeX.className = 'tn-x'; nudgeX.textContent = '×';
+  nudgeGo.addEventListener('click', () => { nudge.hidden = true; go(); });
+  nudgeX.addEventListener('click', () => { nudge.hidden = true; });
 
   function paint() {
     const t = COPY[lang()];
@@ -56,7 +59,8 @@
     foot.querySelectorAll('a[data-page]').forEach((a) => { const [p, h] = a.getAttribute('href').split('#'); a.href = p.split('?')[0] + '?lang=' + lang() + (h ? '#' + h : ''); });
     foot.querySelector('.sib').href = TAROT + (lang() === 'zh' ? 'zh-hant' : '');
     tip.textContent = t.tip; tip.appendChild(document.createElement('small')).textContent = t.tipNote; tip.setAttribute('aria-label', t.tipAria);
-    nudge.textContent = t.tip; nudge.setAttribute('aria-label', t.tipAria);
+    nudgeGo.textContent = t.tip; nudgeGo.setAttribute('aria-label', t.tipAria);
+    nudgeX.setAttribute('aria-label', t.tipClose);
     tip.hidden = !(tipOpen && played);
     if (card) card.classList.toggle('has-tip', !tip.hidden);
   }
@@ -64,12 +68,13 @@
   function go() { location.href = `/api/tip?tier=can&lang=${lang()}${testMode ? '&mode=test' : ''}`; }
   tip.addEventListener('click', () => { tip.classList.add('go'); go(); });
 
-  // Quiet corner hint at 20 pats or the cat's first butt-raise (main.js sets body[data-butt-up]), once per visit,
-  // gone after 5 s; never over the cat.
+  // Small dismissible card at 20 pats or the cat's first butt-raise (main.js sets body[data-butt-up]), once per visit,
+  // pinned just above the caption and cat picker (never over the cat, score/combo or picker); follows the UI language live.
   function maybeNudge() {
     if (nudged || !tipOpen) return;
-    nudged = true; paint(); nudge.hidden = false; setTimeout(() => { nudge.hidden = true; }, 5000);
+    nudged = true; paint(); nudge.hidden = false; setTimeout(() => { nudge.hidden = true; }, 12000);
   }
+  new MutationObserver(paint).observe(document.documentElement, { attributes: true, attributeFilter: ['lang'] });
   const num = document.getElementById('num');
   if (num) new MutationObserver(() => { if ((parseInt(num.textContent, 10) || 0) >= 20) maybeNudge(); })
     .observe(num, { childList: true, characterData: true, subtree: true });
