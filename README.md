@@ -23,6 +23,14 @@ python3 -m http.server 8000   # 然后打开 / then open http://localhost:8000
 
 改了 `src/main.js` 后用 esbuild 重新打包到 `dist/app.js`（命令见 `deploy.sh`）。 After editing `src/main.js`, rebuild `dist/app.js` with esbuild (see `deploy.sh`).
 
+## 上线 · Deploy
+
+`sh deploy.sh` 会把**当前工作树**原样发到正式站，没有测试站。 `sh deploy.sh` ships the **current working tree** as-is to the live site; there is no staging.
+
+1. 发之前先把 `/Volumes/Storge/digital-cat` 里没提交的改动 rebase 到 `origin/main` 上（写这条时是 `6ab0cec`）：`git fetch && git stash && git rebase origin/main && git stash pop`，再核对 `git log -1 origin/main` 已在当前分支里。 Before deploying, rebase the uncommitted work in `/Volumes/Storge/digital-cat` onto `origin/main` (`6ab0cec` at the time of writing) and check `origin/main` is in your branch.
+2. **工作树落后 main 时绝不跑 `deploy.sh`**，否则会把已上线的改动冲掉。 **Never run `deploy.sh` from a working tree that is behind `main`** — it rolls the live site back.
+3. 改动先 PR 进 `main`，合并后再从 `main` 部署。 Merge into `main` via PR first, then deploy from `main`.
+
 ## 作者 · Author
 
 Kun，和一群 AI 编程搭档一起做的。问题或建议请提 Issue，或写信到 hello@deararcana.com。 Made by Kun with a crew of AI coding partners. Questions or ideas: open an issue or email hello@deararcana.com.
