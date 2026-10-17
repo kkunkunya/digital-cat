@@ -14,6 +14,9 @@
     // "1" only after Waffo approves the store for production payments; until then the tip stays hidden.
     "TIP_LIVE": "1"
   },
+  // Anonymous event counters (worker/index.js, class Counter): pack-card clicks / purchase intent, no personal data.
+  "durable_objects": { "bindings": [{ "name": "COUNTER", "class_name": "Counter" }] },
+  "migrations": [{ "tag": "v1", "new_sqlite_classes": ["Counter"] }],
   "workers_dev": false,
   "preview_urls": false
 }
