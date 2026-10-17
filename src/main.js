@@ -59,13 +59,15 @@ const COPY = {
         first: '橘子：嗯？（慢慢回过头）',
         mid: ['又软又弹，压力少了一半。', '橘子：再来一下嘛。', '肩膀是不是松下来了？'],
         high: ['橘子舒服得摊成了一张猫饼。', '呼噜声已经开到最大。', '工作的事，晚点再说。'],
-        pet: ['橘子把头蹭进你的手心。', '橘子舒服得眯起了眼睛。'] } },
+        pet: ['橘子把头蹭进你的手心。', '橘子舒服得眯起了眼睛。'],
+        rub: ['橘子呼噜呼噜，把脑袋往你手上蹭。', '橘子：就是这个节奏，别停。'] } },
       black: { name: '煤球', tag: '傲娇', chip: '傲娇', lines: {
         idle: '煤球斜眼看着你：不许拍。',
         first: '煤球：哼！谁允许你拍的？',
         mid: ['煤球：……只许一下。', '煤球：哼，轻一点。', '煤球的尾巴出卖了它。'],
         high: ['呼噜声？不是我发出的。', '煤球：明天……还可以再拍。', '今天的压力，已经清零。'],
-        pet: ['煤球假装不在意，耳朵却软了下来。', '煤球：哼……再摸一下。'] } },
+        pet: ['煤球假装不在意，耳朵却软了下来。', '煤球：哼……再摸一下。'],
+        turn: ['煤球转过身去：拍太快了，我要冷静一下。', '煤球背对着你。慢一点，它会回来的。'] } },
     },
   },
   en: {
@@ -85,13 +87,15 @@ const COPY = {
         first: 'Tangerine: Hm? (She slowly turns around.)',
         mid: ['Soft and bouncy. Half the stress is gone.', 'Tangerine: One more, please.', 'Are your shoulders loosening up?'],
         high: ['Tangerine has melted into a cat pancake.', 'The purring is at full volume.', 'Work can wait.'],
-        pet: ['Tangerine nuzzles into your palm.', 'Tangerine squints with contentment.'] } },
+        pet: ['Tangerine nuzzles into your palm.', 'Tangerine squints with contentment.'],
+        rub: ['Tangerine purrs and bumps her head into your hand.', 'Tangerine: That rhythm. Don’t stop.'] } },
       black: { name: 'Coal', tag: 'Feisty', chip: 'Feisty', lines: {
         idle: 'Coal is giving you side-eye. No touching.',
         first: 'Coal: Hey! Who said you could do that?',
         mid: ['Coal: Fine. Just one.', 'Coal: Hmph. Not so hard.', 'Coal’s tail is giving it away.'],
         high: ['Purring? That wasn’t me.', 'Coal: You may pat me again tomorrow.', 'Stress level: cleared.'],
-        pet: ['Coal acts aloof, but those ears have gone soft.', 'Coal: Hmph. One more.'] } },
+        pet: ['Coal acts aloof, but those ears have gone soft.', 'Coal: Hmph. One more.'],
+        turn: ['Coal turns away: too fast. Cooling off.', 'Coal has its back to you. Slow down and it will come back.'] } },
     },
   },
 };
@@ -629,7 +633,7 @@ function makeState(cat) {
     dent: new Spring(420, 15), rip: 0, ripPhase: 0,
     lift: new Spring(30, 8), tailUp: new Spring(cat.id === 'orange' ? 26 : 70, cat.id === 'orange' ? 6 : 9),
     bob: new Spring(160, 9), tilt: new Spring(90, 7),
-    hy: new Spring(cat.look.k, cat.look.c), lookUntil: -9, lookSide: 1, // head yaw away from "facing forward"
+    hy: new Spring(cat.look.k, cat.look.c), lookUntil: -9, sulkUntil: -9, lookSide: 1, // head yaw away from "facing forward"
     step: new Spring(40, 10), stepPh: 0, kneadPh: 0, // hind-paw treading / front-paw kneading at the peak
     lid: new Spring(140, 16, cat.lidRest), earL: new Spring(220, 9), earR: new Spring(220, 9),
     mouth: new Spring(240, 18), pop: new Spring(160, 11, 1),
@@ -704,7 +708,7 @@ function update(dt) {
   if (T > S.blinkAt) { lidT = 1.05; if (T > S.blinkAt + 0.12) S.blinkAt = T + rnd(2.2, 5.5); }
   S.lid.t = lidT;
   // head: faces forward at rest; after a pat it turns back over the shoulder toward you (the camera)
-  if (T < S.lookUntil || (S.happy > 0.6 && T - S.lastTap < 1.6)) {
+  if (T >= S.sulkUntil && (T < S.lookUntil || (S.happy > 0.6 && T - S.lastTap < 1.6))) {
     const nk = rig.neck.position, az = Math.atan2(camera.position.x - nk.x, camera.position.z - nk.z);
     let d = Math.atan2(Math.sin(az - Math.PI), Math.cos(az - Math.PI)); // wrap to (-π, π]
     // camera (nearly) behind the cat: commit to one shoulder instead of flipping between them
@@ -1038,6 +1042,20 @@ function endCombo() { combo = 0; $('#combo').classList.remove('on', 'bump'); }
 const raycaster = new THREE.Raycaster();
 const ndc = new THREE.Vector2();
 
+// Temperament (DENE-2239): Coal is slow to warm up and turns away from a rapid-fire barrage (no penalty, it comes
+// back in a couple of seconds); Tangerine warms fast and, once the rhythm is steady, purrs and rubs into the hand.
+let lastQuirkAt = -99;
+function quirk(cat, now) {
+  if (now - lastQuirkAt < 6) return;
+  if (cat.id === 'black' && combo >= 7) {
+    lastQuirkAt = now; S.sulkUntil = T + (REDUCE ? 1.6 : 2.4); S.lookUntil = -9; S.tailUp.v += 3;
+    setLine(pick(cat.lines.turn));
+  } else if (cat.id === 'orange' && combo >= 4 && combo < 12) {
+    lastQuirkAt = now; S.blush = 1; S.bob.v -= 1.2; S.tilt.v += REDUCE ? 0 : 3; S.earL.v -= 4; S.earR.v -= 4; hearts(2);
+    setLine(pick(cat.lines.rub));
+  }
+}
+
 function slap(px, py, hitPoint) {
   const cat = rig.cat, now = performance.now() / 1000;
   taps++; stats.slap++;
@@ -1085,6 +1103,8 @@ function slap(px, py, hitPoint) {
   const fx1 = () => { popText(px, py - 20, pick(words), combo >= 9 ? 'big' : ''); if (combo >= 4 && !REDUCE) ring(px, py); };
   if (combo < 4 && !REDUCE) setTimeout(fx1, 160); else fx1();
   bumpCount();
+  quirk(cat, now);
+  window.dispatchEvent(new CustomEvent('cat:slap', { detail: { cat: cat.id, combo } }));
   if (taps === 5 || taps === 15 || (taps > 15 && taps % 12 === 0)) setLine(pick(combo >= 8 ? cat.lines.high : cat.lines.mid));
 }
 
@@ -1183,7 +1203,10 @@ function useCat(i) {
   endCombo();
   setBackdrop();
   audio.switchCat();
+  window.dispatchEvent(new CustomEvent('cat:switch', { detail: { cat: c.id } }));
 }
+// site.js speaks through the cat's own line
+window.addEventListener('cat:say', (e) => { if (e.detail) setLine(e.detail); });
 document.querySelectorAll('.chip').forEach((b, k) => b.addEventListener('click', () => { audio.unlock(); if (k !== ci) useCat(k); }));
 document.querySelectorAll('#lang [data-l]').forEach((s) => s.addEventListener('click', () => {
   if (s.dataset.l === lang) return;

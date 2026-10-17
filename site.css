@@ -43,3 +43,32 @@ html #stage{flex:none;height:calc(100vh - 66px);height:calc(100svh - 66px);min-h
 #wall .walltip{margin-top:10px;border:0;background:none;font:700 12px/1.3 inherit;color:#ff4f7b;text-decoration:underline;text-underline-offset:2px}
 #badgetoast{position:fixed;left:50%;top:calc(env(safe-area-inset-top) + 70px);transform:translateX(-50%);z-index:21;white-space:nowrap;padding:9px 16px;border-radius:999px;font:800 14px/1.2 -apple-system,sans-serif;color:var(--ink);background:#fff;box-shadow:0 6px 20px #0003;animation:nudgein .4s ease-out;pointer-events:none}
 #badgetoast[hidden]{display:none}
+/* Per-cat bonds (DENE-2239): two badge rows, visit keepsakes, the "meet new friends" concept card, the mood card. */
+#wall h3{margin:10px 0 6px;font-size:13px;text-align:left}
+#wall h3 small{margin-left:8px;font-size:11px;font-weight:600;opacity:.65}
+#wall .memo li button{border:0;border-radius:999px;padding:3px 6px;font:700 10px/1.2 inherit;color:#fff;background:var(--ink)}
+#wall li{min-width:0}
+#newfriends{display:block;margin:2px auto 8px;border:0;border-radius:999px;padding:8px 16px;font:800 13px/1 inherit;color:var(--ink);background:#fffc;box-shadow:0 3px 10px #0001,inset 0 -2px 0 #0000000d}
+#newfriends[hidden],#packsheet[hidden],#moodcard[hidden]{display:none}
+#packsheet{position:fixed;inset:0;z-index:30;display:flex;align-items:flex-end;justify-content:center;background:#0008}
+#packsheet .box{position:relative;width:100%;max-width:440px;max-height:92vh;overflow:auto;padding:18px 16px max(16px,env(safe-area-inset-bottom));border-radius:22px 22px 0 0;background:#fff7ec;color:#7a3f10}
+#packsheet h2{margin:0;font-size:18px}
+#packsheet .sub{margin:2px 0 10px;font-size:12px;opacity:.7}
+#packsheet .x{position:absolute;right:10px;top:8px;border:0;background:none;font-size:26px;line-height:1;color:inherit}
+#packsheet ul{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin:0;padding:0;list-style:none}
+#packsheet li{display:flex;gap:8px;padding:10px;border-radius:14px;background:#fff;box-shadow:0 2px 8px #0001;border:2px solid transparent}
+#packsheet li.pick{border-color:#ff7a3d}
+#packsheet li b{font-size:28px;font-weight:400}
+#packsheet li strong{display:block;font-size:14px}
+#packsheet li small{display:block;font-size:11px;line-height:1.35;opacity:.75}
+#packsheet .note{margin:10px 0;font-size:12px;opacity:.75}
+#packsheet .want{display:block;width:100%;border:0;border-radius:999px;padding:13px;font:800 15px/1 inherit;color:#fff;background:linear-gradient(100deg,#ff7a3d,#ff4f7b)}
+#packsheet .thx{margin:8px 0 0;font-size:13px;font-weight:700;text-align:center}
+#moodcard{position:fixed;left:12px;right:12px;top:calc(env(safe-area-inset-top) + 124px);z-index:25;max-width:420px;margin:0 auto;display:flex;align-items:center;gap:8px;padding:10px 10px 10px 14px;border-radius:18px;background:#fff;color:#7a3f10;box-shadow:0 8px 28px #0003;animation:nudgein .4s ease-out}
+#moodcard span{flex:1;min-width:0}
+#moodcard b{display:block;font-size:13px}
+#moodcard small{display:block;font-size:11px;opacity:.7}
+#moodcard .go{border:0;border-radius:999px;padding:8px 12px;font:800 12px/1 inherit;color:#fff;background:linear-gradient(100deg,#ff7a3d,#ff4f7b)}
+#moodcard .x{border:0;background:none;font-size:22px;line-height:1;color:inherit;padding:2px 6px}
+#wall .memo li:has(button){opacity:1;filter:none;background:#fff}
+#wall .memo li button{display:block;margin:4px auto 0}
