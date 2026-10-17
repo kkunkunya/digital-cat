@@ -5,6 +5,8 @@ const DEBUG = /debug/.test(location.search);
 const clamp = (x, a, b) => Math.min(b, Math.max(a, x));
 const lerp = (a, b, t) => a + (b - a) * t;
 const rnd = (a, b) => a + Math.random() * (b - a);
+// C1: with 'reduce motion' the press still dents the fur, but there is no overshoot, no extra look-hold and no flying fx
+const REDUCE = typeof matchMedia === 'function' && matchMedia('(prefers-reduced-motion: reduce)').matches;
 const pick = (arr) => arr[Math.floor(Math.random() * arr.length)];
 
 // ───────────────────────── cats ─────────────────────────
@@ -1047,7 +1049,7 @@ function slap(px, py, hitPoint) {
   const p = clamp(0.75 + combo * 0.05, 0.75, 1.15);
   // local poke + body squash + jelly + tail flick
   if (hitPoint) S.hit.copy(hitPoint); else S.hit.set(rnd(-0.2, 0.2), 0.62, 0.68);
-  S.dent.x = 0.085 * p; S.dent.v = 0;
+  S.dent.x = 0.085 * p; S.dent.v = REDUCE ? 0 : -0.9 * p; // C1: release springs the dent back past rest before it settles
   S.rip = 0.018 * p; S.ripPhase = 0;
   // every slap lands, but a body that is already squashed has less room left: impulses shrink with the
   // remaining headroom and velocities are capped, so rapid taps can't pump the springs into resonance
@@ -1059,7 +1061,7 @@ function slap(px, py, hitPoint) {
   const whip = taps % 2 ? 1 : -1; // tail whips side to side on alternate slaps
   rig.tail.forEach((b, i) => { const f = p * (i / rig.tail.length); b.vp = Math.min(b.vp + 1.5 * f, 4); b.vy = clamp(b.vy + whip * rnd(4, 6) * f, -8, 8); });
   S.lookSide = S.hit.x < 0 ? 1 : -1; // over the patted side's shoulder
-  setTimeout(() => { S.lookUntil = T + cat.look.hold; }, cat.look.delay); // "who touched my butt?" — turn and look back
+  setTimeout(() => { S.lookUntil = T + cat.look.hold + (REDUCE ? 0 : 0.6); }, cat.look.delay); // "who touched my butt?" — turn and look back, and (C1) hold the stare ~0.6 s longer
   const react = () => {
     S.bob.v = Math.min(S.bob.v + 1.4 * p, 2.5); S.tilt.v = clamp(S.tilt.v + (Math.random() < 0.5 ? -1 : 1) * 2.2, -4, 4);
     S.earL.v = Math.min(S.earL.v + rnd(4, 8), 10); S.earR.v = Math.min(S.earR.v + rnd(4, 8), 10);
@@ -1079,8 +1081,9 @@ function slap(px, py, hitPoint) {
   else if (combo === 4) hearts(2);
 
   const P = TX().pop, words = combo < 4 ? P.soft : combo < 9 ? P.mid : P.big;
-  popText(px, py - 20, pick(words), combo >= 9 ? 'big' : '');
-  ring(px, py);
+  // C1: on the first few pats the body speaks first — the pop word follows the rebound, the ring waits for a streak
+  const fx1 = () => { popText(px, py - 20, pick(words), combo >= 9 ? 'big' : ''); if (combo >= 4 && !REDUCE) ring(px, py); };
+  if (combo < 4 && !REDUCE) setTimeout(fx1, 160); else fx1();
   bumpCount();
   if (taps === 5 || taps === 15 || (taps > 15 && taps % 12 === 0)) setLine(pick(combo >= 8 ? cat.lines.high : cat.lines.mid));
 }
@@ -1117,7 +1120,10 @@ function onDown(e) {
   const hh = raycaster.intersectObject(rig.headProxy, false)[0];
   const hb = hh ? null : raycaster.intersectObject(rig.buttProxy, true)[0];
   const target = hh ? { face: rig.head.worldToLocal(hh.point.clone()).y < 0.0 } : hb ? { point: hb.point.clone() } : null;
-  if (hb) { S.hit.copy(hb.point); S.dent.x = Math.max(S.dent.x, 0.035); } // the fur gives under the fingertip
+  if (hb) { // the fur gives under the fingertip, and the whole body sinks a little with it (C1: press in)
+    S.hit.copy(hb.point); S.dent.x = Math.max(S.dent.x, REDUCE ? 0.035 : 0.06);
+    if (!REDUCE) S.squash.x = Math.max(S.squash.x, 0.07);
+  }
   const pinch = touches.size === 1; // second finger down: possible pinch, the first finger is no longer a tap
   touches.set(e.pointerId, { x0: e.clientX, y0: e.clientY, lx: e.clientX, ly: e.clientY, px, py, target, drag: false });
   if (pinch) { const [a, b] = [...touches.values()]; a.pinch0 = b.pinch0 = Math.hypot(a.lx - b.lx, a.ly - b.ly); }
