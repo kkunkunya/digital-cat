@@ -1,0 +1,2 @@
+# Tombstones: paths Kun deleted. Never restore.
+# A line ending in / covers the whole folder.

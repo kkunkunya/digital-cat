@@ -27,7 +27,7 @@ python3 -m http.server 8000   # 然后打开 / then open http://localhost:8000
 
 `sh deploy.sh` 会把**当前工作树**原样发到正式站，没有测试站。 `sh deploy.sh` ships the **current working tree** as-is to the live site; there is no staging.
 
-1. 发之前先把 `/Volumes/Storge/digital-cat` 里没提交的改动 rebase 到 `origin/main` 上（写这条时是 `6ab0cec`）：`git fetch && git stash && git rebase origin/main && git stash pop`，再核对 `git log -1 origin/main` 已在当前分支里。 Before deploying, rebase the uncommitted work in `/Volumes/Storge/digital-cat` onto `origin/main` (`6ab0cec` at the time of writing) and check `origin/main` is in your branch.
+1. 在包含最新 `origin/main` 的检出里部署：`/Volumes/Storge/oversea-project/digital-cat/main` 先 `git pull --ff-only`（`main/` 只拉不改，有没提交的改动就拉不了，先问清是谁的），或在 rebase 到 `origin/main` 的任务 worktree（`../worktrees/<任务>`）里跑；再核对 `git log -1 origin/main` 已在当前分支里。 Deploy from a checkout that contains the latest `origin/main`: `git pull --ff-only` in `/Volumes/Storge/oversea-project/digital-cat/main` (it is pull-only; if it has uncommitted changes, find out whose first), or a task worktree rebased onto `origin/main`; then check `git log -1 origin/main` is in your branch.
 2. **工作树落后 main 时绝不跑 `deploy.sh`**，否则会把已上线的改动冲掉。 **Never run `deploy.sh` from a working tree that is behind `main`** — it rolls the live site back.
 3. 改动先 PR 进 `main`，合并后再从 `main` 部署。 Merge into `main` via PR first, then deploy from `main`.
 
