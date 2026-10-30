@@ -1,0 +1,21 @@
+{
+  "url": "https://old.reddit.com/r/SideProject/comments/1x78ino/drop_your_side_project_ill_turn_a_few_into_free/ph6horc/",
+  "account": "Main-Abalone-4466 (1)",
+  "now": "2026-10-16T20:36:18.149Z",
+  "comments": [
+    {
+      "id": "thing_t1_ph6horc",
+      "text": "I'd love a clip that starts with one pat on a cat's butt and a ridiculously content purr. That's pretty much the whole experience. I made Digital Cats, a tiny phone-browser toy with real cat sounds; a fifteen-second close-up of that interaction feels right to me.",
+      "url": "https://old.reddit.com/r/SideProject/comments/1x78ino/drop_your_side_project_ill_turn_a_few_into_free/ph6horc/",
+      "author": "Main-Abalone-4466"
+    },
+    {
+      "id": "thing_t1_ph6k2nq",
+      "text": "This is the toy I mean: https://cat.kunkunzheten.top/",
+      "url": "https://old.reddit.com/r/SideProject/comments/1x78ino/drop_your_side_project_ill_turn_a_few_into_free/ph6k2nq/",
+      "childOf": "thing_t1_ph6horc",
+      "author": "Main-Abalone-4466"
+    }
+  ],
+  "errors": []
+}

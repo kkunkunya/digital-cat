@@ -1,0 +1,188 @@
+{
+  "at": "2026-10-16T19:59:38.642Z",
+  "main": "41edd20926633a3aa2fa680496bdbf55a540f11a",
+  "assets": [
+    {
+      "path": "index.html",
+      "status": 200,
+      "equal": true,
+      "onlineHash": "2156fd65e1e860bfbb8f8b26780c7214d2e234ea56a944c09ed3c870a2c7d645",
+      "mainHash": "2156fd65e1e860bfbb8f8b26780c7214d2e234ea56a944c09ed3c870a2c7d645"
+    },
+    {
+      "path": "dist/app.js",
+      "status": 200,
+      "equal": true,
+      "onlineHash": "e604264d461e653e654c993fa58cd3625c91cead775bd4324b8d57f3441b1248",
+      "mainHash": "e604264d461e653e654c993fa58cd3625c91cead775bd4324b8d57f3441b1248"
+    },
+    {
+      "path": "site.js",
+      "status": 200,
+      "equal": true,
+      "onlineHash": "6f6dc087a20dfe9470096f1971282d7a27138fe90735c605aa1763fa1a96d9e1",
+      "mainHash": "6f6dc087a20dfe9470096f1971282d7a27138fe90735c605aa1763fa1a96d9e1"
+    },
+    {
+      "path": "site.css",
+      "status": 200,
+      "equal": true,
+      "onlineHash": "833d58b79af54a457ac9ff9dd401833bd4af05ed9809367a5fc8dd1371d6ec43",
+      "mainHash": "833d58b79af54a457ac9ff9dd401833bd4af05ed9809367a5fc8dd1371d6ec43"
+    },
+    {
+      "path": "about.html",
+      "status": 200,
+      "equal": true,
+      "onlineHash": "cca80f8cda0d7a17e88a24c6ca1f97f263c5f07a9f5a38a113c1bfe50d4fd6a5",
+      "mainHash": "cca80f8cda0d7a17e88a24c6ca1f97f263c5f07a9f5a38a113c1bfe50d4fd6a5"
+    },
+    {
+      "path": "page.js",
+      "status": 200,
+      "equal": true,
+      "onlineHash": "240937fd788a1de19344d7c5cdf04e31702db5cac698f69bb5088d290c1441cf",
+      "mainHash": "240937fd788a1de19344d7c5cdf04e31702db5cac698f69bb5088d290c1441cf"
+    },
+    {
+      "path": "page.css",
+      "status": 200,
+      "equal": true,
+      "onlineHash": "eed86dd1a2d7a8af3fba31e7810ed0a9b667a8744d22cf40bc167024b44010ad",
+      "mainHash": "eed86dd1a2d7a8af3fba31e7810ed0a9b667a8744d22cf40bc167024b44010ad"
+    },
+    {
+      "path": "privacy.html",
+      "status": 200,
+      "equal": true,
+      "onlineHash": "c68740897f5fd41361a9260e20e9152a3d4a891f8ea4f3522b4d488a95fe316c",
+      "mainHash": "c68740897f5fd41361a9260e20e9152a3d4a891f8ea4f3522b4d488a95fe316c"
+    },
+    {
+      "path": "terms.html",
+      "status": 200,
+      "equal": true,
+      "onlineHash": "64355709c19ff081376c34f08435699b5e73f2da8104d89c721ad9ea7fad16cd",
+      "mainHash": "64355709c19ff081376c34f08435699b5e73f2da8104d89c721ad9ea7fad16cd"
+    },
+    {
+      "path": "thanks.html",
+      "status": 200,
+      "equal": true,
+      "onlineHash": "1ed4e52d87cfbb93e74ca7df0332049cce2a39e78ef59cf8b2dc08f9f9e647da",
+      "mainHash": "1ed4e52d87cfbb93e74ca7df0332049cce2a39e78ef59cf8b2dc08f9f9e647da"
+    },
+    {
+      "path": "robots.txt",
+      "status": 200,
+      "equal": true,
+      "onlineHash": "03b4c13545785eb47883f53c8fb5380bd9c3ed6b00908be1e19d66d3d4ad3e99",
+      "mainHash": "03b4c13545785eb47883f53c8fb5380bd9c3ed6b00908be1e19d66d3d4ad3e99"
+    },
+    {
+      "path": "sitemap.xml",
+      "status": 200,
+      "equal": true,
+      "onlineHash": "4a93f3d9d62ab070dba04cc34df488aeebc0d20220ddddcd9f70e328b4b2f365",
+      "mainHash": "4a93f3d9d62ab070dba04cc34df488aeebc0d20220ddddcd9f70e328b4b2f365"
+    },
+    {
+      "path": "og.png",
+      "status": 200,
+      "equal": true,
+      "onlineHash": "9f5d5f117f014b8c574fb19f7ecd814486b8eac89a6b2e5b1a76c42a23e2cce6",
+      "mainHash": "9f5d5f117f014b8c574fb19f7ecd814486b8eac89a6b2e5b1a76c42a23e2cce6"
+    }
+  ],
+  "devices": [
+    {
+      "name": "desktop",
+      "errors": [],
+      "badResponses": [],
+      "initial": {
+        "title": "在线撸猫解压小游戏｜数字猫猫",
+        "hint": "拍一下屁屁，它就呼噜\n真猫录音 · 点一下听听 · 左右拖动转视角",
+        "body": "中文\nEnglish\n关闭声音\n建议佩戴耳机\n已拍0下\n\n拍一下屁屁，它就呼噜\n真猫录音 · 点一下听听 · 左右拖动转视角\n橘子正在晒太阳，拍拍她吧。\n放松完成，分享战绩\n橘子\n温顺\n煤球\n傲娇\n晒给朋友\n\n拍拍它的屁屁，它会哼哼给你听。 怎么玩 · 声音来源 · 费用 · 常见问题\n\n声音都来自真猫。坤坤做的小玩具。\n\n数字猫猫是一个手机网页解压小玩具：拍拍猫屁屁，听真猫的哼哼和喵叫，30 秒班味清零。免费，不用下载，不用登录；喜欢的话可以自愿打赏一次 US$2.99（一次性，不是订阅，价格与退款）。\n\n开源代码\n·\n联系：hello@deararcana.com\n·\n不收集个人信息，只在你手机里记战绩\n·\n条款\n·\n拍打声和喵声录自坤坤家的猫\n我们还做了免费塔罗占卜站 Dear Arcana →",
+        "scroll": {
+          "height": 1125,
+          "viewport": 1000,
+          "overflow": "hidden auto"
+        }
+      },
+      "interaction": {
+        "count": "24",
+        "buttUp": "1",
+        "done": "btn"
+      },
+      "switchCat": "煤球\n傲娇",
+      "mute": "off",
+      "tipVisible": true,
+      "cardImage": {
+        "loaded": true,
+        "width": 1080,
+        "height": 1920
+      },
+      "checkout": {
+        "url": "https://pancake.waffo.ai/store/digital-cat-si5udbml/checkout/[session-redacted]",
+        "text": "Digital Cat\n返回\nCat Treat · 请猫猫吃罐罐\n\nA thank-you tip for Digital Cat (cat.kunkunzheten.top). No goods are shipped.\n\nCat Treat · 请猫猫吃罐罐\nUS$2.99\n合计\nUS$2.99\n您的信息\n支付\n\n我们收集这些信息以帮助防范欺诈，确保您的支付安全。\n\n电子邮箱\n国家/地区\n美国\n添加企业信息\n继续\n\n此订单由我们的在线经销商和记录商户 Waffo.com Limited 处理，同时负责处理订单相关的咨询和退货。\n\n条款\n隐私\n中文"
+      },
+      "about": "数字猫猫\n中文\nEnglish\n橘子 · 温顺\n拍拍屁屁就哼哼\n\n手机上的一只 3D 毛绒猫。拍拍它，它会抖毛、呼噜、回你一声喵。不用下载，不用登录。\n\n去拍猫 →\n🔊\n声音是真猫\n\n拍打声和喵声来自 Kun 家猫咪的手机录音；呼噜声来自 Wikimedia 的公有领域录音。没有一声是合成的。\n\n音效来源\n🧶\n一根根毛\n\n猫是在浏览器里实时画出来的（Three.js），每一次拍都会让毛动起来。两只可选：温顺的橘子，傲娇的煤球。\n\n👋\n谁做的\n\nKun，一个靠 AI 搭档写代码的人。上班累了想撸猫，就做了一只放进手机里，也送给同样需要喘口气的你。\n\nGitHub 源码\n💬\n常见问题\n怎么玩？\n\n点猫屁屁，它就呼噜；左右拖动换视角。\n\n手机能玩吗？要下载吗？\n没声音？\n要钱吗？\n猫是真的吗？\n拍猫\n关于\n隐私\n条款\nGitHub\n声音出处\n© 2026 Kun · hello@deararcana.com",
+      "english": {
+        "title": "Cat Game Online | Digital Cats · Real Purrs",
+        "hint": "Pat its butt. Hear that happy little purr.\nReal cat recordings · drag sideways to turn the view"
+      },
+      "afterScroll": {
+        "y": 0,
+        "text": "中文\nEnglish\nSound off\nBest with headphones\n0pats\n\nPat its butt. Hear that happy little purr.\nReal cat recordings · drag sideways to turn the view\nTangerine is sunbathing. Give her a pat.\nAll done. Share your score.\nTangerine\nEasygoing\nCoal\nFeisty\nShare with a friend\n\nPat its butt. It purrs back. How to play · Sound sources · Pricing · FAQ\n\nReal sounds from real cats. A tiny toy by Kunkun.\n\nDigital Cats is a tiny stress-relief toy for your phone: pat a cat's butt and hear real purrs and meows. Free, no download, no sign-up. Optional one-time US$2.99 tip if you like it, never a subscription (pricing & refunds).\n\nOpen source\n·\nContact: hello@deararcana.com\n·\nNo personal data — scores stay on your device\n·\nTerms\n·\nPats & meows recorded from Kunkun's own cat\nAlso by us: Dear Arcana, free online tarot →"
+      }
+    },
+    {
+      "name": "mobile",
+      "errors": [],
+      "badResponses": [],
+      "initial": {
+        "title": "在线撸猫解压小游戏｜数字猫猫",
+        "hint": "拍一下屁屁，它就呼噜\n真猫录音 · 点一下听听 · 左右拖动转视角",
+        "body": "中文\nEnglish\n关闭声音\n建议佩戴耳机\n已拍0下\n\n拍一下屁屁，它就呼噜\n真猫录音 · 点一下听听 · 左右拖动转视角\n橘子正在晒太阳，拍拍她吧。\n放松完成，分享战绩\n橘子\n温顺\n煤球\n傲娇\n晒给朋友\n\n拍拍它的屁屁，它会哼哼给你听。 怎么玩 · 声音来源 · 费用 · 常见问题\n\n声音都来自真猫。坤坤做的小玩具。\n\n数字猫猫是一个手机网页解压小玩具：拍拍猫屁屁，听真猫的哼哼和喵叫，30 秒班味清零。免费，不用下载，不用登录；喜欢的话可以自愿打赏一次 US$2.99（一次性，不是订阅，价格与退款）。\n\n开源代码\n·\n联系：hello@deararcana.com\n·\n不收集个人信息，只在你手机里记战绩\n·\n条款\n·\n拍打声和喵声录自坤坤家的猫\n我们还做了免费塔罗占卜站 Dear Arcana →",
+        "scroll": {
+          "height": 870,
+          "viewport": 664,
+          "overflow": "hidden auto"
+        }
+      },
+      "interaction": {
+        "count": "24",
+        "buttUp": "1",
+        "done": "btn"
+      },
+      "switchCat": "煤球\n傲娇",
+      "mute": "off",
+      "tipVisible": true,
+      "cardImage": {
+        "loaded": true,
+        "width": 1080,
+        "height": 1920
+      },
+      "checkout": {
+        "url": "https://pancake.waffo.ai/store/digital-cat-si5udbml/checkout/[session-redacted]",
+        "text": "Digital Cat\n返回\nCat Treat · 请猫猫吃罐罐\n\nA thank-you tip for Digital Cat (cat.kunkunzheten.top). No goods are shipped.\n\nCat Treat · 请猫猫吃罐罐\nUS$2.99\n合计\nUS$2.99\n您的信息\n支付\n\n我们收集这些信息以帮助防范欺诈，确保您的支付安全。\n\n电子邮箱\n国家/地区\n美国\n添加企业信息\n继续\n\n此订单由我们的在线经销商和记录商户 Waffo.com Limited 处理，同时负责处理订单相关的咨询和退货。\n\n条款\n隐私\n中文"
+      },
+      "about": "数字猫猫\n中文\nEnglish\n橘子 · 温顺\n拍拍屁屁就哼哼\n\n手机上的一只 3D 毛绒猫。拍拍它，它会抖毛、呼噜、回你一声喵。不用下载，不用登录。\n\n去拍猫 →\n🔊\n声音是真猫\n\n拍打声和喵声来自 Kun 家猫咪的手机录音；呼噜声来自 Wikimedia 的公有领域录音。没有一声是合成的。\n\n音效来源\n🧶\n一根根毛\n\n猫是在浏览器里实时画出来的（Three.js），每一次拍都会让毛动起来。两只可选：温顺的橘子，傲娇的煤球。\n\n👋\n谁做的\n\nKun，一个靠 AI 搭档写代码的人。上班累了想撸猫，就做了一只放进手机里，也送给同样需要喘口气的你。\n\nGitHub 源码\n💬\n常见问题\n怎么玩？\n\n点猫屁屁，它就呼噜；左右拖动换视角。\n\n手机能玩吗？要下载吗？\n没声音？\n要钱吗？\n猫是真的吗？\n拍猫\n关于\n隐私\n条款\nGitHub\n声音出处\n© 2026 Kun · hello@deararcana.com",
+      "english": {
+        "title": "Cat Game Online | Digital Cats · Real Purrs",
+        "hint": "Pat its butt. Hear that happy little purr.\nReal cat recordings · drag sideways to turn the view"
+      },
+      "afterScroll": {
+        "y": 0,
+        "text": "中文\nEnglish\nSound off\nBest with headphones\n0pats\n\nPat its butt. Hear that happy little purr.\nReal cat recordings · drag sideways to turn the view\nTangerine is sunbathing. Give her a pat.\nAll done. Share your score.\nTangerine\nEasygoing\nCoal\nFeisty\nShare with a friend\n\nPat its butt. It purrs back. How to play · Sound sources · Pricing · FAQ\n\nReal sounds from real cats. A tiny toy by Kunkun.\n\nDigital Cats is a tiny stress-relief toy for your phone: pat a cat's butt and hear real purrs and meows. Free, no download, no sign-up. Optional one-time US$2.99 tip if you like it, never a subscription (pricing & refunds).\n\nOpen source\n·\nContact: hello@deararcana.com\n·\nNo personal data — scores stay on your device\n·\nTerms\n·\nPats & meows recorded from Kunkun's own cat\nAlso by us: Dear Arcana, free online tarot →"
+      }
+    }
+  ],
+  "shareCopy": {
+    "zh": "minified Unicode escapes; actual mobile share payload verified in followup.json",
+    "en": true
+  },
+  "tipStatus": {
+    "live": true
+  }
+}

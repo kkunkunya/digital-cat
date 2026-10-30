@@ -1,0 +1,136 @@
+[
+  {
+    "name": "desktop",
+    "scroll": {
+      "y": 125,
+      "height": 1000,
+      "scrollHeight": 1125,
+      "footer": {
+        "x": 0,
+        "y": 897,
+        "width": 1440,
+        "height": 103.1875,
+        "top": 897,
+        "right": 1440,
+        "bottom": 1000.1875,
+        "left": 0
+      },
+      "text": "拍拍它的屁屁，它会哼哼给你听。 怎么玩 · 声音来源 · 费用 · 常见问题\n\n声音都来自真猫。坤坤做的小玩具。\n\n数字猫猫是一个手机网页解压小玩具：拍拍猫屁屁，听真猫的哼哼和喵叫，30 秒班味清零。免费，不用下载，不用登录；喜欢的话可以自愿打赏一次 US$2.99（一次性，不是订阅，价格与退款）。\n\n开源代码\n·\n联系：hello@deararcana.com\n·\n不收集个人信息，只在你手机里记战绩\n·\n条款\n·\n拍打声和喵声录自坤坤家的猫\n我们还做了免费塔罗占卜站 Dear Arcana →"
+    },
+    "links": [
+      {
+        "text": "音效来源",
+        "href": "https://cat.kunkunzheten.top/audio/CREDITS.txt"
+      },
+      {
+        "text": "怎么玩 · 声音来源 · 费用 · 常见问题",
+        "href": "https://cat.kunkunzheten.top/about.html?lang=zh#faq"
+      },
+      {
+        "text": "价格与退款",
+        "href": "https://cat.kunkunzheten.top/terms.html?lang=zh#price"
+      },
+      {
+        "text": "pricing & refunds",
+        "href": "https://cat.kunkunzheten.top/terms.html?lang=zh#price-en"
+      },
+      {
+        "text": "开源代码",
+        "href": "https://github.com/kkunkunya/digital-cat"
+      },
+      {
+        "text": "联系：hello@deararcana.com",
+        "href": "mailto:hello@deararcana.com"
+      },
+      {
+        "text": "不收集个人信息，只在你手机里记战绩",
+        "href": "https://cat.kunkunzheten.top/privacy.html?lang=zh"
+      },
+      {
+        "text": "条款",
+        "href": "https://cat.kunkunzheten.top/terms.html?lang=zh"
+      },
+      {
+        "text": "拍打声和喵声录自坤坤家的猫",
+        "href": "https://cat.kunkunzheten.top/audio/CREDITS.txt"
+      },
+      {
+        "text": "我们还做了免费塔罗占卜站 Dear Arcana →",
+        "href": "https://deararcana.com/zh-hant"
+      }
+    ],
+    "faq": "💬\n常见问题\n怎么玩？\n\n点猫屁屁，它就呼噜；左右拖动换视角。\n\n手机能玩吗？要下载吗？\n\n手机浏览器直接打开就能玩，免下载，免登录。\n\n没声音？\n\n先关静音键，或戴上耳机。\n\n要钱吗？\n\n基础玩法一直免费。可选一次性 US$2.99 小费，不是订阅。\n\n猫是真的吗？\n\n声音是真猫录的，它很喜欢被拍屁屁。"
+  },
+  {
+    "name": "mobile",
+    "scroll": {
+      "y": 206,
+      "height": 664,
+      "scrollHeight": 870,
+      "footer": {
+        "x": 0,
+        "y": 480,
+        "width": 390,
+        "height": 183.5625,
+        "top": 480,
+        "right": 390,
+        "bottom": 663.5625,
+        "left": 0
+      },
+      "text": "拍拍它的屁屁，它会哼哼给你听。 怎么玩 · 声音来源 · 费用 · 常见问题\n\n声音都来自真猫。坤坤做的小玩具。\n\n数字猫猫是一个手机网页解压小玩具：拍拍猫屁屁，听真猫的哼哼和喵叫，30 秒班味清零。免费，不用下载，不用登录；喜欢的话可以自愿打赏一次 US$2.99（一次性，不是订阅，价格与退款）。\n\n开源代码\n·\n联系：hello@deararcana.com\n·\n不收集个人信息，只在你手机里记战绩\n·\n条款\n·\n拍打声和喵声录自坤坤家的猫\n我们还做了免费塔罗占卜站 Dear Arcana →"
+    },
+    "links": [
+      {
+        "text": "音效来源",
+        "href": "https://cat.kunkunzheten.top/audio/CREDITS.txt"
+      },
+      {
+        "text": "怎么玩 · 声音来源 · 费用 · 常见问题",
+        "href": "https://cat.kunkunzheten.top/about.html?lang=zh#faq"
+      },
+      {
+        "text": "价格与退款",
+        "href": "https://cat.kunkunzheten.top/terms.html?lang=zh#price"
+      },
+      {
+        "text": "pricing & refunds",
+        "href": "https://cat.kunkunzheten.top/terms.html?lang=zh#price-en"
+      },
+      {
+        "text": "开源代码",
+        "href": "https://github.com/kkunkunya/digital-cat"
+      },
+      {
+        "text": "联系：hello@deararcana.com",
+        "href": "mailto:hello@deararcana.com"
+      },
+      {
+        "text": "不收集个人信息，只在你手机里记战绩",
+        "href": "https://cat.kunkunzheten.top/privacy.html?lang=zh"
+      },
+      {
+        "text": "条款",
+        "href": "https://cat.kunkunzheten.top/terms.html?lang=zh"
+      },
+      {
+        "text": "拍打声和喵声录自坤坤家的猫",
+        "href": "https://cat.kunkunzheten.top/audio/CREDITS.txt"
+      },
+      {
+        "text": "我们还做了免费塔罗占卜站 Dear Arcana →",
+        "href": "https://deararcana.com/zh-hant"
+      }
+    ],
+    "share": {
+      "text": "拍了一下猫屁屁，它居然舒服地呼噜了。你也试试？ https://cat.kunkunzheten.top/",
+      "files": [
+        {
+          "name": "拍猫屁屁-0下.png",
+          "type": "image/png",
+          "size": 1961522
+        }
+      ]
+    },
+    "faq": "💬\n常见问题\n怎么玩？\n\n点猫屁屁，它就呼噜；左右拖动换视角。\n\n手机能玩吗？要下载吗？\n\n手机浏览器直接打开就能玩，免下载，免登录。\n\n没声音？\n\n先关静音键，或戴上耳机。\n\n要钱吗？\n\n基础玩法一直免费。可选一次性 US$2.99 小费，不是订阅。\n\n猫是真的吗？\n\n声音是真猫录的，它很喜欢被拍屁屁。"
+  }
+]

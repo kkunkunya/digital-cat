@@ -1,9 +1,28 @@
 # Audio credits
 
-- `purr_orange.mp3` — from "Whiskers' purr edit.ogg", Wikimedia Commons, Adam Cuerden (edit by X!), Public Domain. Trimmed, levelled, EQ'd.
-- `purr_black.mp3` — from "Purring cat.oga", Wikimedia Commons, Mysid, Public Domain. Trimmed, EQ'd.
-- `meow.mp3`, `chirp.mp3` — from "Meow.ogg", Wikimedia Commons, Dcrosby at English Wikipedia, CC BY-SA 3.0 (https://creativecommons.org/licenses/by-sa/3.0/). High-passed; chirp is the first 0.26 s with a fade. Derivatives are shared under CC BY-SA 3.0.
+Every sound in the current build is a real recording. Nothing is synthesized.
 
-Pat sound is synthesized in code (no sample).
+## Used by the site
 
-The purr is never played as a loop: `src/main.js` cuts each recording into its own inhale/exhale breath cycles (`cuts`) and re-sequences them in random order with per-breath rate jitter, equal-power crossfades and occasional short pauses.
+Kun's own cat (`audio/kun/`, recorded by Kun on an iPhone, used with Kun's permission):
+- `p1`–`p5` — real pats on the cat's back/butt, from `IMG_4953.MOV` (the clip the promo video opens with). 0.16 s each, room hum high-passed, light denoise, levelled. One plays on every pat.
+- `m1`–`m4` — the cat's own short meows, from `IMG_4943.MOV` (at 0.0 s, 7.6 s, 13.0 s, 20.1 s). Speech-free spots only, picked with the AudioSet sound classifier (MIT/ast-finetuned-audioset) and checked on the spectrogram; high-passed, light denoise, faded, levelled. One plays every 5–6 pats, never closer than 2.5 s however fast you pat. Coal plays the same meows 10 % lower.
+
+Kun's videos contain no audible purr (the classifier finds 0 purr in all three), so the purr comes from public recordings:
+- `purr_orange.mp3` (Tangerine) — from "Whiskers' purr edit.ogg", Wikimedia Commons, Adam Cuerden (edit by X!), Public Domain. Trimmed, levelled, EQ'd.
+- `purr_black.mp3` (Coal) — from "Purring cat.oga", Wikimedia Commons, Mysid, Public Domain. Trimmed, EQ'd.
+
+The purr is never played as a loop: `src/main.js` re-sequences the recording's own breath cycles (`cuts`) at random, swells it slowly while you pat and fades it slowly after you stop. Phone speakers can't play the ~25 Hz rumble, so a copy of the low band is gently saturated to make it audible (processing of the recording, not a synthesized sound).
+
+## Reference recordings (listened against, not shipped)
+
+- "Purring and meowing.ogg", Wikimedia Commons, Barvinok, CC BY-SA 3.0 — a petted cat, purring with meows.
+- "Bachgasse … Cats Purring - Katzenschnurren.ogg", Wikimedia Commons, Mrs.Better, CC BY-SA 4.0 — a British Shorthair purring while stroked.
+- "Purring cat bertie.ogg", Wikimedia Commons, jim_mowatt, Public Domain.
+- plus the two purr sources above.
+
+## Earlier rounds (files still in `audio/`, not loaded by the current build)
+
+- `meow.mp3`, `chirp.mp3` — from "Meow.ogg", Wikimedia Commons, Dcrosby, CC BY-SA 3.0.
+- `audio/mew/` — `o1`–`o3` from "Meow.ogg" (CC BY-SA 3.0, Dcrosby); `o4` "MeowUSA.wav" (SalomeCzapiewski, CC0); `o5` "Meow of a Siamese cat - freemaster2.wav" (CC0); `b1`, `b2`, `b5` "GettingOutImpatient.ogg" (Heismark, PD); `b3`, `b4` "Meow of a pleading cat.oga" (Heismark, PD).
+- `audio/hum/` — short hums cut from `audio/mew/` (same sources).
