@@ -9,3 +9,51 @@ node_modules/
 _tools/
 _shots/
 .dev.vars
+
+# kun 标准（kun-agent-mono .githooks/lib/onboard/template/gitignore.tmpl，规范见 skills/general/repo-layout/SKILL.md）
+# 系统和编辑器
+Thumbs.db
+.idea/
+*.swp
+# 密钥：值放 Keychain 或环境变量
+.env
+.env.*
+!.env.example
+# 各 CLI 的本机私有文件
+.claude/settings.local.json
+CLAUDE.local.md
+.claude/worktrees/
+# 机器草稿
+.scratch/
+.local/
+.multica/
+# 依赖和缓存
+.venv/
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.ruff_cache/
+# 仓外资料：原件、大输入放项目根 data/，跑出来的放项目根 outputs/（检出里误建的也挡住）
+/data/
+/outputs/
+# 大的二进制：要版本化的先问 Kun 用 Git LFS
+*.zip
+*.rar
+*.7z
+*.tar
+*.tar.gz
+*.tgz
+*.exe
+*.dll
+*.obj
+*.o
+*.pdb
+*.ilk
+*.pkl
+*.pt
+*.pth
+*.ckpt
+*.h5
+*.npy
+*.npz
+*.parquet
