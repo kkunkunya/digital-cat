@@ -30,6 +30,9 @@
 - `index_v1_backup.html`、`bench_before.html`、`数字猫猫-头脑风暴-三遍整合-1015.html` → 旧版首页备份、性能对比页、头脑风暴整理 → 只查历史时读，不上线
 - `README.md` → 对外说明（中英）和上线步骤
 - `docs/` → 决定（`docs/adr/`）和现状（`docs/status.md`），都是第一次用到才建；`docs/deleted-paths.txt` 是删过不许复活的路径
+- `.agents/skills/` → 本仓项目技能目录 → 新增或查找本仓技能时读（来源：PR #21 / DENE-2785）
+- `.claude/` → Claude Code 的权限配置与指向 `.agents/skills/` 的技能软链 → 调整权限或检查技能入口时读（来源：PR #21 / DENE-2785）
+- `opencode.json` → OpenCode 的权限配置 → 检查 OpenCode 文件访问限制时读（来源：PR #21 / DENE-2785）
 
 ## 红线：绝对不能碰
 
